@@ -1,0 +1,16 @@
+[
+    {
+        "pais_id": 33,
+        "pais_name": "Brasil",
+        "estado_id": 52,
+        "estado_name": "GOIÁS"
+    },
+    {
+        "pais_name": "Brasil",
+        "municipio_name": "DIVINÓPOLIS DE GOIÁS",
+        "estado_id": 52,
+        "pais_id": 33,
+        "estado_name": "GOIÁS",
+        "municipio_id": 5208301
+    }
+]
