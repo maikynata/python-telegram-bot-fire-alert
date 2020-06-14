@@ -18,7 +18,7 @@ $ pip install requirements.txt
 After the install process is over, you'll be able to run the application. Just run node:
 
 ```bash
-$ python bot-alerta-fogo.py
+$ python src/bot-alerta-fogo.py
 ```
 
 ## Documentation INPE API and WhastApp API
