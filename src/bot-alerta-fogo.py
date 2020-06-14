@@ -1,6 +1,8 @@
 import requests
 
-resp = requests.get('http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/auxiliar/paises')
+baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
+
+resp = requests.get(baseURL + '/auxiliar/paises')
 if resp.status_code != 200:
     # This means something went wrong.
     raise requests.exceptions.RequestException('GET /auxiliar/paises/ {}'.format(resp.status_code))
