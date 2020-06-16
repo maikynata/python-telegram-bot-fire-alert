@@ -4,14 +4,14 @@ http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/swagger.json and the cl
 
 ## Prerequisites
 * Python 3.7
-*
+* Pip3
 *
 
 ## Quick Install
 The first thing you should do is install the requirements.
 
 ```bash
-$ pip install requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 ## Running Your Application
