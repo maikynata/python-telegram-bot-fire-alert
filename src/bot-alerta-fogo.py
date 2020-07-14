@@ -14,6 +14,7 @@ respCoordinates = requests.get(coordinatesURL)
 if respCoordinates.status_code != 200 or respCount.status_code != 200:
     # This means something went wrong.
     raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
+    # noinspection PyUnreachableCode
     raise requests.exceptions.RequestException('GET /focos/count/ {}'.format(respCount.status_code))
 else:
     print("Success")
