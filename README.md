@@ -1,6 +1,6 @@
 # Bot Alerta de Fogo - Project v1.0.0
 This is a **project in development** that provides an integration data between INPE Open Data Base API Service on: 
-http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/swagger.json and the client Python to send alerts via Bot WhastApp.
+http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/swagger.json and the client Python to send alerts via Telegram Bot.
 
 ## Prerequisites
 * Python 3.7
@@ -21,6 +21,6 @@ After the install process is over, you'll be able to run the application. Just r
 $ python src/bot-alerta-fogo.py
 ```
 
-## Documentation INPE API and WhastApp API
+## Documentation INPE API and Telegram Bot API
 All INPE API endpoints are available in the [docs](http://queimadas.dgi.inpe.br/queimadas/dados-abertos/apidoc/) section of INPE website.
-All WhastApp endpoints are available in the [docs]() section of WhatsApp Services website.
+All Telegram endpoints are available in the [docs]() section of Telegram Services website.
