@@ -1,0 +1,124 @@
+// URL: GET http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/focos/?pais_id=33&estado_id=52&municipio_id=5205307
+
+[
+    {
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -47.5107,
+                -13.4237
+            ]
+        },
+        "properties": {
+            "risco_fogo": null,
+            "longitude": -47.51071,
+            "data_hora_gmt": "2020-07-14T05:00:00+00:00",
+            "precipitacao": null,
+            "latitude": -13.42372,
+            "pais": "Brasil",
+            "numero_dias_sem_chuva": null,
+            "estado": "GOIÁS",
+            "municipio": "CAVALCANTE",
+            "satelite": "NPP-375"
+        },
+        "type": "Feature",
+        "id": "focos_ams_24h.e8e8040d-fc31-3bfa-85c3-b8b7c19356bb",
+        "geometry_name": "geom"
+    },
+    {
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -47.5142,
+                -13.4233
+            ]
+        },
+        "properties": {
+            "risco_fogo": null,
+            "longitude": -47.51422,
+            "data_hora_gmt": "2020-07-14T05:00:00+00:00",
+            "precipitacao": null,
+            "latitude": -13.42329,
+            "pais": "Brasil",
+            "numero_dias_sem_chuva": null,
+            "estado": "GOIÁS",
+            "municipio": "CAVALCANTE",
+            "satelite": "NPP-375"
+        },
+        "type": "Feature",
+        "id": "focos_ams_24h.1c0bde5e-1631-35c9-af95-03e3b15ed248",
+        "geometry_name": "geom"
+    },
+    {
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -47.5131,
+                -13.4228
+            ]
+        },
+        "properties": {
+            "risco_fogo": null,
+            "longitude": -47.51311,
+            "data_hora_gmt": "2020-07-14T05:00:00+00:00",
+            "precipitacao": null,
+            "latitude": -13.42281,
+            "pais": "Brasil",
+            "numero_dias_sem_chuva": null,
+            "estado": "GOIÁS",
+            "municipio": "CAVALCANTE",
+            "satelite": "NPP-375"
+        },
+        "type": "Feature",
+        "id": "focos_ams_24h.05a4dbd6-2c3f-3334-a8d2-62a2f5686e62",
+        "geometry_name": "geom"
+    },
+    {
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -47.513,
+                -13.426
+            ]
+        },
+        "properties": {
+            "risco_fogo": null,
+            "longitude": -47.51303,
+            "data_hora_gmt": "2020-07-14T04:10:42+00:00",
+            "precipitacao": null,
+            "latitude": -13.42597,
+            "pais": "Brasil",
+            "numero_dias_sem_chuva": null,
+            "estado": "GOIÁS",
+            "municipio": "CAVALCANTE",
+            "satelite": "NOAA-20"
+        },
+        "type": "Feature",
+        "id": "focos_ams_24h.e296ebc4-2320-3d45-9845-a8dd2a2f41c6",
+        "geometry_name": "geom"
+    },
+    {
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -47.5124,
+                -13.4224
+            ]
+        },
+        "properties": {
+            "risco_fogo": null,
+            "longitude": -47.51242,
+            "data_hora_gmt": "2020-07-14T04:10:42+00:00",
+            "precipitacao": null,
+            "latitude": -13.42245,
+            "pais": "Brasil",
+            "numero_dias_sem_chuva": null,
+            "estado": "GOIÁS",
+            "municipio": "CAVALCANTE",
+            "satelite": "NOAA-20"
+        },
+        "type": "Feature",
+        "id": "focos_ams_24h.b20f0d8e-650f-3b8e-a406-e8759774c3fe",
+        "geometry_name": "geom"
+    }
+]
