@@ -16,7 +16,7 @@ if respCoordenates.status_code != 200 or respCount.status_code != 200:
     raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordenates.status_code))
     raise requests.exceptions.RequestException('GET /focos/count/ {}'.format(respCount.status_code))
 else:
-    print("Sucess")
+    print("Success")
 
 count = respCount.json()
 print('Numero de supostos focos: {}'.format(count['Brasil']))
