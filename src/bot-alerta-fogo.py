@@ -7,21 +7,6 @@ def welcome(update, context):
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
-<<<<<<< HEAD
-coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}&municipio_id={}'.format(pais_id, estado_id, municipio_id)
-countURL = baseURL + '/focos/count?pais_id={}&estado_id={}&municipio_id={}'.format(pais_id, estado_id, municipio_id)
-
-respCount = requests.get(countURL)
-respCoordinates = requests.get(coordinatesURL)
-
-if respCoordinates.status_code != 200 or respCount.status_code != 200:
-    # This means something went wrong.
-    raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
-    # noinspection PyUnreachableCode
-    raise requests.exceptions.RequestException('GET /focos/count/ {}'.format(respCount.status_code))
-else:
-    print("Success")
-=======
 def focos(update, context):
     import requests
 
@@ -30,22 +15,15 @@ def focos(update, context):
     estado_id = int(52)
     municipio_id = int(5205307)
 
-    coordenatesURL = baseURL + '/focos/?pais_id={}&estado_id={}&municipio_id={}'.format(pais_id, estado_id, municipio_id)
+    coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}&municipio_id={}'.format(pais_id, estado_id, municipio_id)
     countURL = baseURL + '/focos/count?pais_id={}&estado_id={}&municipio_id={}'.format(pais_id, estado_id, municipio_id)
->>>>>>> 85256110178cd7f5bce38101e8640ea816ab6eba
 
     respCount = requests.get(countURL)
-    respCoordenates = requests.get(coordenatesURL)
+    respCoordinates = requests.get(coordinatesURL)
 
-<<<<<<< HEAD
-for todo_item in respCoordinates.json():
-    print('municipio = {}, localizacao = {}, {}'.format(todo_item['properties']['municipio'],
-                                                        todo_item['properties']['latitude'],
-                                                        todo_item['properties']['longitude']))
-=======
-    if respCoordenates.status_code != 200 or respCount.status_code != 200:
+    if respCoordinates.status_code != 200 or respCount.status_code != 200:
         # This means something went wrong.
-        raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordenates.status_code))
+        raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
         raise requests.exceptions.RequestException('GET /focos/count/ {}'.format(respCount.status_code))
     else:
 
@@ -54,7 +32,7 @@ for todo_item in respCoordinates.json():
         message = 'Número de supostos focos: {}'.format(count['Brasil'])
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
-        for todo_item in respCoordenates.json():
+        for todo_item in respCoordinates.json():
             message = 'municipio = {}, localizacao = {}, {}'.format(todo_item['properties']['municipio'],
                                                                 todo_item['properties']['latitude'],
                                                                 todo_item['properties']['longitude'])
@@ -81,4 +59,3 @@ def main():
 
 if __name__ == "__main__":
     main()
->>>>>>> 85256110178cd7f5bce38101e8640ea816ab6eba
