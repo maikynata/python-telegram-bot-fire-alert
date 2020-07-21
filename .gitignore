@@ -4,3 +4,4 @@ virtualenv/*
 .vscode/*
 src/chave.py
 src/auxiliar.py
+__pycache__/
