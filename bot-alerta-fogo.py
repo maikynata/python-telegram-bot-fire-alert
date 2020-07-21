@@ -34,8 +34,8 @@ def focos(update, context):
 
         for todo_item in respCoordinates.json():
             message = 'municipio = {}, localizacao = {}, {}'.format(todo_item['properties']['municipio'],
-                                                                todo_item['properties']['latitude'],
-                                                                todo_item['properties']['longitude'])
+                                                                    todo_item['properties']['latitude'],
+                                                                    todo_item['properties']['longitude'])
             print(message)
             context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
