@@ -23,4 +23,4 @@ $ python src/bot-alerta-fogo.py
 
 ## Documentation INPE API and Telegram Bot API
 All INPE API endpoints are available in the [docs](http://queimadas.dgi.inpe.br/queimadas/dados-abertos/apidoc/) section of INPE website.
-All Telegram endpoints are available in the [docs]() section of Telegram Services website.
+All Telegram Bot API Manual are available in the [docs](https://core.telegram.org/bots/api) section of Telegram Services website.
