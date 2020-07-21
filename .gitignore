@@ -1,3 +1,6 @@
 .idea/*
 */virtualenv
 virtualenv/*
+.vscode/*
+src/chave.py
+src/auxiliar.py
