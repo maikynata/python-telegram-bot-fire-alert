@@ -41,6 +41,7 @@ def focos(update, context):
 
     else:
         message = "Não há focos registrados por satélite"
+        print(message)
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
 def main():
