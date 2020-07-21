@@ -1,1 +1,1 @@
-worker: python bot-alerta-fogo.py
+worker: python src/bot-alerta-fogo.py
