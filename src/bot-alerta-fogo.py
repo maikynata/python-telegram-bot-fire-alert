@@ -1,4 +1,4 @@
-import chave
+import os
 import requests
 from telegram.ext import Updater, CommandHandler
 
@@ -45,7 +45,7 @@ def focos(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
 def main():
-    token = chave.token
+    token = os.environ['TOKEN']
     updater = Updater(token=token, use_context=True)
 
     updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
