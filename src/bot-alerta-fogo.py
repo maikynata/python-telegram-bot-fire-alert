@@ -26,8 +26,8 @@ def focos(update, context):
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
         raise requests.exceptions.RequestException('GET /focos/count/ {}'.format(respCount.status_code))
     else:
+        count = respCount.json()
 
-    count = respCount.json()
     if 'Brasil' in count:
         message = 'Número de supostos focos: {}'.format(count['Brasil'])
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
