@@ -16,7 +16,7 @@ def transformaDecimalGrau(grau):
     milesimos = milesimosSeg * 10
     
     
-    coordenada = str(int(abs(grau))) + '°' + str(minutos) + '\u0027' + str(int(segundos)) + '.' + str(int(milesimos)) + "'" 
+    coordenada = str(int(abs(grau))) + '°' + str(minutos) + '\u0027' + str(int(segundos)) + '.' + str(int(milesimos)) + "''" 
     return coordenada 
 
 
