@@ -3,7 +3,6 @@ import requests
 from telegram.ext import Updater, CommandHandler
 from decimal import Decimal
 
-# Recebe Grau e retorna uma string contendo Grau Minuto e Segundo
 def transformaDecimalGrau(grau):
     grauDecimal = int(grau) - Decimal(grau)
 
@@ -11,10 +10,15 @@ def transformaDecimalGrau(grau):
     minutos = int(minutosDecimal)
 
     segundosDecimal = Decimal(minutosDecimal) - minutos
-    segundos = int(segundosDecimal * 60)
+    segundos = segundosDecimal * 60
+
+    milesimosSeg = segundos - int(segundos)
+    milesimos = milesimosSeg * 10
     
-    coordenada = str(int(grau)) + ' ' + str(minutos) + ' ' + str(segundos)
+    
+    coordenada = str(int(abs(grau))) + '°' + str(minutos) + '\u0027' + str(int(segundos)) + '.' + str(int(milesimos)) + '"'
     return coordenada 
+
 
 def welcome(update, context):
     message = 'Olá '+ update.message.from_user.first_name +'!'
@@ -51,7 +55,17 @@ def focos(update, context):
                                                                     todo_item['properties']['latitude'],
                                                                     todo_item['properties']['longitude'])
 
-            # Link Base: https://www.google.com.br/maps/place/13°49'18.0"S+47°22'48.6"W
+            message += 'https://www.google.com.br/maps/place/'
+            if todo_item['latitude'] < 0:
+                message += transformaDecimalGrau(todo_item['latitude']) + 'S'
+            else:
+                message += transformaDecimalGrau(todo_item['latitude']) + 'N'
+
+            if todo_item['longitude'] < 0:
+                message += transformaDecimalGrau(todo_item['longitude']) + 'W'
+            else:
+                message += transformaDecimalGrau(todo_item['longitude']) + 'O'
+
             print(message)
             context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
