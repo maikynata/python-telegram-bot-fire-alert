@@ -1,6 +1,20 @@
 import os
 import requests
 from telegram.ext import Updater, CommandHandler
+from decimal import Decimal
+
+# Recebe Grau e retorna uma string contendo Grau Minuto e Segundo
+def transformaDecimalGrau(grau):
+    grauDecimal = int(grau) - Decimal(grau)
+
+    minutosDecimal = Decimal(grauDecimal) * 60
+    minutos = int(minutosDecimal)
+
+    segundosDecimal = Decimal(minutosDecimal) - minutos
+    segundos = int(segundosDecimal * 60)
+    
+    coordenada = str(int(grau)) + ' ' + str(minutos) + ' ' + str(segundos)
+    return coordenada 
 
 def welcome(update, context):
     message = 'Olá '+ update.message.from_user.first_name +'!'
@@ -36,6 +50,8 @@ def focos(update, context):
             message = 'municipio = {}, localizacao = {}, {}'.format(todo_item['properties']['municipio'],
                                                                     todo_item['properties']['latitude'],
                                                                     todo_item['properties']['longitude'])
+
+            # Link Base: https://www.google.com.br/maps/place/13°49'18.0"S+47°22'48.6"W
             print(message)
             context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
