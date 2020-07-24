@@ -51,20 +51,20 @@ def focos(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
         for todo_item in respCoordinates.json():
-            message = 'municipio = {}, localizacao = {}, {}'.format(todo_item['properties']['municipio'],
+            message = 'municipio = {}, localizacao = {}, {}\n'.format(todo_item['properties']['municipio'],
                                                                     todo_item['properties']['latitude'],
                                                                     todo_item['properties']['longitude'])
 
-            message += 'https://www.google.com.br/maps/place/'
-            if todo_item['latitude'] < 0:
-                message += transformaDecimalGrau(todo_item['latitude']) + 'S'
+            message += ' https://www.google.com.br/maps/place/'
+            if todo_item['properties']['latitude'] < 0:
+                message += transformaDecimalGrau(todo_item['properties']['latitude']) + 'S'
             else:
-                message += transformaDecimalGrau(todo_item['latitude']) + 'N'
+                message += transformaDecimalGrau(todo_item['properties']['latitude']) + 'N'
 
-            if todo_item['longitude'] < 0:
-                message += transformaDecimalGrau(todo_item['longitude']) + 'W'
+            if todo_item['properties']['longitude'] < 0:
+                message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'W'
             else:
-                message += transformaDecimalGrau(todo_item['longitude']) + 'O'
+                message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'O'
 
             print(message)
             context.bot.send_message(chat_id=update.effective_chat.id, text=message)
