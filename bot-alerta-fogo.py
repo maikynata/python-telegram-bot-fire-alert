@@ -3,6 +3,47 @@ import requests
 from telegram.ext import Updater, CommandHandler
 from decimal import Decimal
 
+def contaFoco(cidade, count):
+    count += '&municipio_id={}'.format(cidade)
+    respCount = requests.get(count)
+    if respCount.status_code != 200:
+        raise requests.exceptions.RequestException('GET /focos/count/ {}'.format(respCount.status_code))
+    else:
+        count = respCount.json()
+
+    if 'Brasil' in count:
+        focos = count['Brasil']
+    else:
+        focos = 0
+    
+    return focos 
+
+def localFoco(cidade, coord):
+    coord += '&municipio_id={}'.format(cidade)
+    respCoordinates = requests.get(coord)
+    if respCoordinates.status_code != 200:
+        raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
+    else:
+        message = str() 
+        for todo_item in respCoordinates.json():
+            message += 'Município = {}, Localização = {}, {}\n'.format(todo_item['properties']['municipio'],
+                                                                    todo_item['properties']['latitude'],
+                                                                    todo_item['properties']['longitude'])
+
+            message += 'https://www.google.com.br/maps/place/'
+            if todo_item['properties']['latitude'] < 0:
+                message += transformaDecimalGrau(todo_item['properties']['latitude']) + 'S'
+            else:
+                message += transformaDecimalGrau(todo_item['properties']['latitude']) + 'N'
+
+            if todo_item['properties']['longitude'] < 0:
+                message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'W'
+            else:
+                message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'O'
+            
+            message += '\n\n'
+    return message    
+
 def transformaDecimalGrau(grau):
     grauDecimal = int(grau) - Decimal(grau)
 
@@ -31,48 +72,24 @@ def focos(update, context):
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
     estado_id = int(52)
-    municipio_id = int(5205307)
+    municipios = [5205307, 5221080, 5213509]
 
-    coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}&municipio_id={}'.format(pais_id, estado_id, municipio_id)
-    countURL = baseURL + '/focos/count?pais_id={}&estado_id={}&municipio_id={}'.format(pais_id, estado_id, municipio_id)
+    coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
+    countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
 
-    respCount = requests.get(countURL)
-    respCoordinates = requests.get(coordinatesURL)
-
-    if respCoordinates.status_code != 200 or respCount.status_code != 200:
-        # This means something went wrong.
-        raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
-        raise requests.exceptions.RequestException('GET /focos/count/ {}'.format(respCount.status_code))
+    focos = 0
+    for id in municipios:
+        focos += contaFoco(id, countURL)
+        
+    if focos > 0:
+        message = 'O número de supostos focos de incêndio na região dos calungas é de {}\n'.format(focos)
+        for id in municipios:
+            message += localFoco(id, coordinatesURL)
     else:
-        count = respCount.json()
+        message = 'Não há focos de incêndio registrados na região dos calungas'
 
-    if 'Brasil' in count:
-        message = 'Número de supostos focos: {}'.format(count['Brasil'])
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-
-        for todo_item in respCoordinates.json():
-            message = 'Município = {}, Localização = {}, {}\n'.format(todo_item['properties']['municipio'],
-                                                                    todo_item['properties']['latitude'],
-                                                                    todo_item['properties']['longitude'])
-
-            message += ' https://www.google.com.br/maps/place/'
-            if todo_item['properties']['latitude'] < 0:
-                message += transformaDecimalGrau(todo_item['properties']['latitude']) + 'S'
-            else:
-                message += transformaDecimalGrau(todo_item['properties']['latitude']) + 'N'
-
-            if todo_item['properties']['longitude'] < 0:
-                message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'W'
-            else:
-                message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'O'
-
-            print(message)
-            context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-
-    else:
-        message = "Não há focos registrados por satélite"
-        print(message)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    print(message)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
 def main():
     token = os.environ['TOKEN']
