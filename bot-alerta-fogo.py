@@ -26,9 +26,9 @@ def localFoco(cidade, coord):
     else:
         message = str() 
         for todo_item in respCoordinates.json():
-            message += 'Município = {}, Localização = {}, {}\n'.format(todo_item['properties']['municipio'],
-                                                                    todo_item['properties']['latitude'],
-                                                                    todo_item['properties']['longitude'])
+            message += '{}\nCoordenadas = {}, {}\n'.format(todo_item['properties']['municipio'],
+                                                           todo_item['properties']['latitude'],
+                                                           todo_item['properties']['longitude'])
 
             message += 'https://www.google.com.br/maps/place/'
             if todo_item['properties']['latitude'] < 0:
