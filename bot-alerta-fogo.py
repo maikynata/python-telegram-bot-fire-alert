@@ -66,7 +66,7 @@ def welcome(update, context):
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
-def focos(update, context):
+def calungas(update, context):
     import requests
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
@@ -96,7 +96,7 @@ def main():
     updater = Updater(token=token, use_context=True)
 
     updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
-    updater.dispatcher.add_handler(CommandHandler('focos', focos))
+    updater.dispatcher.add_handler(CommandHandler('calungas', calungas))
 
     updater.start_polling()
     print(str(updater))

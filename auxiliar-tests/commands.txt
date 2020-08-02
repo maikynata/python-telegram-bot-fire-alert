@@ -1,2 +1,2 @@
 iniciar - Boas vindas
-focos - Relatório dos focos de incêndio registrados pelo satélite
+calungas - Relatório dos focos de incêndio registrados pelo satélite na região dos calungas
