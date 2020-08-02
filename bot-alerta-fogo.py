@@ -91,12 +91,17 @@ def calungas(update, context):
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
+def ajuda(update, context):
+    message = 'Os dados apresentados pelo Labareda Alerta são atualizados a cada 3 horas, nos seguintes horários: 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 (UTC) Conforme o site http://queimadas.dgi.inpe.br.'
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
 def main():
     token = os.environ['TOKEN']
     updater = Updater(token=token, use_context=True)
 
     updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
     updater.dispatcher.add_handler(CommandHandler('calungas', calungas))
+    updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
 
     updater.start_polling()
     print(str(updater))
