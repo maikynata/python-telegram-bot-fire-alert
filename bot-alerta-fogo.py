@@ -66,7 +66,7 @@ def welcome(update, context):
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
-def calungas(update, context):
+def kalungas(update, context):
     import requests
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
@@ -82,11 +82,11 @@ def calungas(update, context):
         focos += contaFoco(id, countURL)
         
     if focos > 0:
-        message = 'O número de supostos focos de incêndio na região dos calungas é de {}\n'.format(focos)
+        message = 'O número de supostos focos de incêndio na região dos kalungas é de {}\n'.format(focos)
         for id in municipios:
             message += localFoco(id, coordinatesURL)
     else:
-        message = 'Não há focos de incêndio registrados na região dos calungas'
+        message = 'Não há focos de incêndio registrados na região dos kalungas'
 
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
@@ -100,7 +100,7 @@ def main():
     updater = Updater(token=token, use_context=True)
 
     updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
-    updater.dispatcher.add_handler(CommandHandler('calungas', calungas))
+    updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
     updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
 
     updater.start_polling()

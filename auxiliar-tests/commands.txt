@@ -1,3 +1,3 @@
 iniciar - Boas vindas
-calungas - Relatório dos focos de incêndio registrados pelo satélite na região dos calungas
+kalungas - Relatório dos focos de incêndio registrados pelo satélite na região dos kalungas
 ajuda - Mostra em quais horários o Labareda recebe novas informações
