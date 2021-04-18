@@ -82,11 +82,11 @@ def kalungas(update, context):
         focos += contaFoco(id, countURL)
         
     if focos > 0:
-        message = 'O número de supostos focos de incêndio na região dos kalungas é de {}\n'.format(focos)
+        message = 'O número de supostos focos de incêndio na região dos Kalungas é de {}\n'.format(focos)
         for id in municipios:
             message += localFoco(id, coordinatesURL)
     else:
-        message = 'Não há focos de incêndio registrados na região dos kalungas'
+        message = 'Não há focos de incêndio registrados na região dos Kalungas'
 
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
