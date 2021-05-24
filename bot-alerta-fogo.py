@@ -44,6 +44,26 @@ def localFoco(cidade, coord):
             message += '\n\n'
     return message    
 
+def linkAllFocos(cidade, coord):
+    coord += '&municipio_id={}'.format(cidade)
+    respCoordinates = requests.get(coord)
+    if respCoordinates.status_code != 200:
+        raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
+    else:
+        message = str() 
+        focosList = []
+        for todo_item in respCoordinates.json():
+            focosList.append (todo_item['properties']['latitude'],todo_item['properties']['longitude'])
+
+            
+            message += 'https://www.google.com/maps/dir//'+ focosList
+            
+            
+            message += '\n\n'
+    return message    
+
+
+
 def transformaDecimalGrau(grau):
     grauDecimal = int(grau) - Decimal(grau)
 
@@ -87,6 +107,8 @@ def kalungas(update, context):
             message += localFoco(id, coordinatesURL)
     else:
         message = 'Não há focos de incêndio registrados na região dos Kalungas'
+
+    message += linkAllFocos(id, coordinatesURL)
 
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)

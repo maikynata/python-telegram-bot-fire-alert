@@ -1,7 +1,10 @@
 .idea/*
 */virtualenv
 virtualenv/*
+*/venv
+venv/*
 .vscode/*
 src/chave.py
 src/auxiliar.py
+maps.py
 __pycache__/
