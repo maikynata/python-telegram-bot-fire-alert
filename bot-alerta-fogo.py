@@ -112,6 +112,7 @@ def kalungas(update, context):
     print(message)
     print(message2)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message2)
 
 def ajuda(update, context):
     message = 'Os dados apresentados pelo Labareda Alerta são atualizados a cada 3 horas, nos seguintes horários: 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 (UTC) Conforme o site http://queimadas.dgi.inpe.br.'
