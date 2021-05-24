@@ -63,7 +63,6 @@ def linkAllFocos(cidade, coord):
     return message    
 
 
-
 def transformaDecimalGrau(grau):
     grauDecimal = int(grau) - Decimal(grau)
 
@@ -108,9 +107,10 @@ def kalungas(update, context):
     else:
         message = 'Não há focos de incêndio registrados na região dos Kalungas'
 
-    message += linkAllFocos(id, coordinatesURL)
+    message2 = linkAllFocos(id, coordinatesURL)
 
     print(message)
+    print(message2)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
 def ajuda(update, context):
