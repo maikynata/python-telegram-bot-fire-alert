@@ -51,12 +51,11 @@ def linkAllFocos(cidade, coord):
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
         message = str() 
-        focosList = []
         for todo_item in respCoordinates.json():
-            focosList.append (todo_item['properties']['latitude'],todo_item['properties']['longitude'])
+            location = (todo_item['properties']['latitude'],todo_item['properties']['longitude'])
 
             
-            message += 'https://www.google.com/maps/dir//'+ focosList
+            message += 'https://www.google.com/maps/dir//'+ location
             
             
             message += '\n\n'
