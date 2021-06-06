@@ -5,7 +5,6 @@ http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/swagger.json and the cl
 ## Prerequisites
 * Python 3.7
 * Pip3
-*
 
 ## Quick Install
 The first thing you should do is install the requirements.
@@ -18,7 +17,7 @@ $ pip3 install -r requirements.txt
 After the install process is over, you'll be able to run the application. Just run node:
 
 ```bash
-$ python src/bot-alerta-fogo.py
+$ python bot-alerta-fogo.py
 ```
 
 ## Documentation INPE API and Telegram Bot API

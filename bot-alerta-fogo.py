@@ -106,8 +106,7 @@ def kalungas(update, context):
             message += localFoco(id, coordinatesURL)
     else:
         message = 'Não há focos de incêndio registrados na região dos Kalungas'
-
-    message2 = linkAllFocos(id, coordinatesURL)
+        message2 = linkAllFocos(id, coordinatesURL)
 
     print(message)
     print(message2)
