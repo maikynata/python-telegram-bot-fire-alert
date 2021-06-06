@@ -50,16 +50,17 @@ def linkAllFocos(cidade, coord):
     if respCoordinates.status_code != 200:
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
-        message = str() 
+        location = str() 
         for todo_item in respCoordinates.json():
-            location = (todo_item['properties']['latitude'],todo_item['properties']['longitude'])
+            # location = (todo_item['properties']['latitude'],todo_item['properties']['longitude'])
+            location += '{}\nCoordenadas = {}, {}\n'.format(todo_item['properties']['municipio'])
 
             
-            message += 'https://www.google.com/maps/dir//'+ location
+            location += 'https://www.google.com/maps/dir//'+ location
             
             
-            message += '\n\n'
-    return message    
+            location += '\n\n'
+    return location    
 
 
 def transformaDecimalGrau(grau):

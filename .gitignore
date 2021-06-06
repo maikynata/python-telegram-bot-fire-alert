@@ -7,4 +7,5 @@ venv/*
 src/chave.py
 src/auxiliar.py
 maps.py
+teste.html
 __pycache__/
