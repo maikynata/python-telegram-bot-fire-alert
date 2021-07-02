@@ -108,7 +108,7 @@ def kalungas(update, context):
     else:
         message = 'Não há focos de incêndio registrados na região dos Kalungas'
         # message_linkall = linkAllFocos(id, coordinatesURL)
-        message_linkall = 'Teste envio linkall'
+        message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
 
     print(message)
     #print(message_linkall)
