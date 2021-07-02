@@ -110,7 +110,7 @@ def kalungas(update, context):
         message_linkall = 'Teste envio linkall'
 
     print(message)
-    print(message_linkall)
+    #print(message_linkall)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
 
