@@ -118,8 +118,7 @@ def kalungas(update, context):
 def cidade(update, context):
     import requests
 
-    askcidade = 'Olá, digite o código do município que você deseja ver a localização dos focos de incêndio, ou,' 
-    + 'acesse o menu com o comando /kalunga para ver os focos da região Kalunga, \n\n'
+    askcidade = 'Olá, digite o código do município que você deseja ver a localização dos focos de incêndio, ou, acesse o menu com o comando /kalunga para ver os focos da região Kalunga, \n\n'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
     cidade = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
