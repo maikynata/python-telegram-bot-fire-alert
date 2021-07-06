@@ -1,6 +1,6 @@
 import os
 import requests
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from decimal import Decimal
 
 def contaFoco(cidade, count):
@@ -121,6 +121,7 @@ def cidade(update, context):
     askcidade = 'Olá, digite o código do município que você deseja.'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
     cidade = update.message.text
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
@@ -159,6 +160,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
     updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
     updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
+    updater.add_handler(MessageHandler(Filters.text, cidade))
 
     updater.start_polling()
     print(str(updater))
