@@ -115,7 +115,7 @@ def kalungas(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
 
-def cidade(update, context, cidade):
+def cidade(update, context):
     import requests
 
     askcidade = 'Olá, digite o código do município que você deseja.'
