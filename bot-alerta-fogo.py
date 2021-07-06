@@ -136,9 +136,8 @@ def cidade(update, context):
         
     if focos > 0:
         message = 'O número de supostos focos de incêndio na região deste Munucípio é de {}\n'.format(focos)
-        for id in municipios:
-            message += localFoco(id, coordinatesURL)
-            message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
+        message += localFoco(cidade, coordinatesURL)
+        message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
         message = 'Não há focos de incêndio registrados na região deste Município'
 
