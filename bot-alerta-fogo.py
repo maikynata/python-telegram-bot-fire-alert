@@ -125,7 +125,7 @@ def cidade(update, context):
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
     estado_id = int(52)
-    municipios = [cidade]
+    municipios = int(cidade)
 
     coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
     countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
