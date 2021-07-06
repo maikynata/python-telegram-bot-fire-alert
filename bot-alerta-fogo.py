@@ -132,8 +132,7 @@ def cidade(update, context):
     countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
 
     focos = 0
-    for id in municipios:
-        focos += contaFoco(id, countURL)
+    focos += contaFoco(cidade, countURL)
         
     if focos > 0:
         message = 'O número de supostos focos de incêndio na região deste Munucípio é de {}\n'.format(focos)
