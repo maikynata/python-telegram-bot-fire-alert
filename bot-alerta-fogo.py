@@ -160,7 +160,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
     updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
     updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
-    updater.add_handler(MessageHandler(Filters.text, cidade))
+    updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
 
     updater.start_polling()
     print(str(updater))
