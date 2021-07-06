@@ -115,6 +115,38 @@ def kalungas(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
 
+def cidade(update, context, cidade):
+    import requests
+
+    askcidade = 'Olá, digite o código do município que você deseja.'
+    context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
+    cidade = update.message.text
+
+    baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
+    pais_id = int(33)
+    estado_id = int(52)
+    municipios = [cidade]
+
+    coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
+    countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
+
+    focos = 0
+    for id in municipios:
+        focos += contaFoco(id, countURL)
+        
+    if focos > 0:
+        message = 'O número de supostos focos de incêndio na região deste Munucípio é de {}\n'.format(focos)
+        for id in municipios:
+            message += localFoco(id, coordinatesURL)
+            message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
+    else:
+        message = 'Não há focos de incêndio registrados na região deste Município'
+
+    print(message)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
+
+
 def ajuda(update, context):
     message = 'Os dados apresentados pelo Labareda Alerta são atualizados a cada 3 horas, nos seguintes horários: 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 (UTC) Conforme o site http://queimadas.dgi.inpe.br.'
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
@@ -125,6 +157,7 @@ def main():
 
     updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
     updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
+    updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
     updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
 
     updater.start_polling()
