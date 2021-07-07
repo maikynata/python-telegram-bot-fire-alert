@@ -118,7 +118,8 @@ def kalungas(update, context):
 def cidade(update, context):
     import requests
 
-    askcidade = 'Olá, digite o código do município que você deseja ver a localização dos focos de incêndio, ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
+    askcidade = 'Olá, digite o código do município que você deseja ver a localização dos focos de incêndio.\n Pesquise o código do Munincípio em: https://www.ibge.gov.br/explica/codigos-dos-municipios.php.\n'
+    +'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
     cidade = update.message.text
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
@@ -135,7 +136,7 @@ def cidade(update, context):
     focos += contaFoco(cidade, countURL)
         
     if focos > 0:
-        message = 'O número de supostos focos de incêndio na região deste Município código:'+ cidade +' é de {}\n\n'.format(focos)
+        message = 'O número de supostos focos de incêndio na região deste Município código: '+ cidade +' é de {}\n\n'.format(focos)
         message += localFoco(cidade, coordinatesURL)
         message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
