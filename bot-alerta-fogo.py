@@ -119,7 +119,7 @@ def cidade(update, context):
     import requests
 
     askcidade = 'Olá, digite o código do município que você deseja ver a localização dos focos de incêndio.\n Pesquise o código do Munincípio em: https://www.ibge.gov.br/explica/codigos-dos-municipios.php.\n'
-    +'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
+    'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
     cidade = update.message.text
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
