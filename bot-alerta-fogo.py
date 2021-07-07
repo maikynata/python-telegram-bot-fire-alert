@@ -135,7 +135,7 @@ def cidade(update, context):
     focos += contaFoco(cidade, countURL)
         
     if focos > 0:
-        message = 'O número de supostos focos de incêndio na região deste Município é de {}\n\n'.format(focos)
+        message = 'O número de supostos focos de incêndio na região deste Município código:'+ cidade +' é de {}\n\n'.format(focos)
         message += localFoco(cidade, coordinatesURL)
         message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
