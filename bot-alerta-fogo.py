@@ -2,6 +2,7 @@ import os
 import requests
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from decimal import Decimal
+import csv
 
 def contaFoco(cidade, count):
     count += '&municipio_id={}'.format(cidade)
@@ -115,19 +116,44 @@ def kalungas(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
 
+def read_csv(cidade,estado):
+
+    muni = cidade
+    uf = estado
+
+    with open('municipio.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+
+        for row in csv_reader:
+            line_count = 0
+            if row[0] == muni and row[1] == uf:
+                # print(f'O código do municipio é: {row[2]}.')
+                cod_muni=row[2]
+                return cod_muni
+            line_count += 1
+
+
 def cidade(update, context):
     import requests
 
-    askcidade = 'Olá, digite o código do município que você deseja ver a localização dos focos de incêndio.\nPesquise o código do Município em: https://www.ibge.gov.br/explica/codigos-dos-municipios.php.\n'
-    'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
+    askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalvante.\n\n'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
     cidade = update.message.text
+
+    askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
+    context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
+    estado = update.message.text
+
+    # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+
+    cod_muni = read_csv(cidade,estado)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
     estado_id = int(52)
-    municipios = int(cidade)
+    municipios = int(cod_muni)
 
     coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
     countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)

@@ -1,4 +1,4 @@
-iniciar - Boas vindas
+iniciar - Usar o bot e boas vindas
 kalungas - Relatório dos focos de incêndio registrados pelo satélite na região dos kalungas
 cidade - Relatório dos focos por município. Digite o código do município.
 ajuda - Mostra em quais horários o Labareda recebe novas informações
