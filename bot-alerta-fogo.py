@@ -137,9 +137,16 @@ def read_csv(cidade,estado):
 def cidade(update, context):
     import requests
 
+
     askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalvante.\n\n'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
     cidade = update.message.text
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+
+    return cidade
+
+def estado(update, context):
+    import requests
 
     askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
@@ -147,8 +154,9 @@ def cidade(update, context):
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
-
-    cod_muni = read_csv(cidade,estado)
+    
+    cidade_resp = cidade()
+    cod_muni = read_csv(cidade_resp,estado)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
@@ -159,11 +167,11 @@ def cidade(update, context):
     countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
 
     focos = 0
-    focos += contaFoco(cidade, countURL)
+    focos += contaFoco(cidade_resp, countURL)
         
     if focos > 0:
         message = 'O número de supostos focos de incêndio na região deste Município código: '+ cidade +' é de {}\n\n'.format(focos)
-        message += localFoco(cidade, coordinatesURL)
+        message += localFoco(cidade_resp, coordinatesURL)
         message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
         message = 'Não há focos de incêndio registrados na região deste Município'
