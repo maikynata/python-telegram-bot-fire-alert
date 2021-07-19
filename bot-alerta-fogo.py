@@ -86,6 +86,19 @@ def welcome(update, context):
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
+    import requests
+
+    cidade = 'NA'
+    while (cidade == 'NA'):
+        askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
+        context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
+        cidade = update.message.text
+
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+
+    estado(update,context,cidade)
+
+
 def kalungas(update, context):
     import requests
 
@@ -134,18 +147,18 @@ def read_csv(cidade,estado):
             line_count += 1
 
 
-def cidade(update, context):
-    import requests
+# def cidade(update, context):
+#     import requests
 
-    cidade = 'NA'
-    while (cidade == 'NA'):
-        askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
-        context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
-        cidade = update.message.text
+#     cidade = 'NA'
+#     while (cidade == 'NA'):
+#         askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
+#         context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
+#         cidade = update.message.text
 
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+#     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
 
-    estado(update,context,cidade)
+#     estado(update,context,cidade)
 
 def estado(update, context, city):
     import requests
@@ -194,9 +207,9 @@ def main():
 
     updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
     updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
-    updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
+    # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
     updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
-    updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
+    # updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
 
     updater.start_polling()
     print(str(updater))
