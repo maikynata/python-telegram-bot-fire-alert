@@ -137,10 +137,12 @@ def read_csv(cidade,estado):
 def cidade(update, context):
     import requests
 
+    cidade = 'NA'
+    while (cidade == 'NA'):
+        askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
+        context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
+        cidade = update.message.text
 
-    askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
-    context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
-    cidade = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
 
     estado(update,context,cidade)
