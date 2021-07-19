@@ -1,8 +1,12 @@
 import os
 import requests
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from decimal import Decimal
 import csv
+
+STATE1 = 1
+STATE2 = 2
 
 def contaFoco(cidade, count):
     count += '&municipio_id={}'.format(cidade)
@@ -88,15 +92,16 @@ def welcome(update, context):
 
     import requests
 
-    cidade = 'NA'
-    while (cidade == 'NA'):
-        askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
-        context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
-        cidade = update.message.text
+    askcidade = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
+    update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True)) 
+    return STATE1
 
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+    # context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
+    # cidade = update.message.text
 
-    estado(update,context,cidade)
+    # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+
+    # estado(update,context,cidade)
 
 
 def kalungas(update, context):
@@ -205,11 +210,19 @@ def main():
     token = os.environ['TOKEN']
     updater = Updater(token=token, use_context=True)
 
-    updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
+    # updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
     updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
     # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
     updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
     # updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
+
+    conversation_handler = ConversationHandler(
+        entry_points=[CommandHandler('iniciar', welcome)],
+        states={
+            STATE1: [MessageHandler(Filters.text, inputFeedback)],
+            STATE2: [MessageHandler(Filters.text, inputFeedback2)]
+        })
+    updater.dispatcher.add_handler(conversation_handler)
 
     updater.start_polling()
     print(str(updater))
