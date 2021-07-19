@@ -162,7 +162,7 @@ def estado(update, context, city):
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
     estado_id = int(52)
-    municipios = int(cod_muni)
+    municipio = int(cod_muni)
 
     coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
     countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
@@ -171,7 +171,7 @@ def estado(update, context, city):
     focos += contaFoco(cod_muni, countURL)
         
     if focos > 0:
-        message = 'O número de supostos focos de incêndio na região deste Município código: '+ cidade +' é de {}\n\n'.format(focos)
+        message = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
         message += localFoco(cod_muni, coordinatesURL)
         message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
