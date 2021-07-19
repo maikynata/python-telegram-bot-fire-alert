@@ -143,9 +143,9 @@ def cidade(update, context):
     cidade = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
 
-    return cidade
+    estado(update,context,cidade)
 
-def estado(update, context):
+def estado(update, context, city):
     import requests
 
     askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
@@ -155,7 +155,7 @@ def estado(update, context):
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
-    cidade_resp = cidade()
+    cidade_resp = city
     cod_muni = read_csv(cidade_resp,estado)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
