@@ -168,8 +168,8 @@ def read_csv(cidade,estado):
 def estado(update, context):
     import requests
 
-    # askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
-    # context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
+    askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
+    context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
     estado = 'Goiás'
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
