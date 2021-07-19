@@ -121,7 +121,7 @@ def read_csv(cidade,estado):
     muni = cidade
     uf = estado
 
-    with open('municipio.csv', encoding="utf8") as csv_file:
+    with open('municipio.csv', encoding="latin1") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
 
