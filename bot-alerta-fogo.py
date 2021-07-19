@@ -157,6 +157,7 @@ def estado(update, context, city):
     
     cidade_resp = 'Cavalcante'
     cod_muni = read_csv(cidade_resp,estado)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='O cod muni é: ' + cod_muni)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
