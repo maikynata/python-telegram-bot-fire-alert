@@ -165,17 +165,17 @@ def read_csv(cidade,estado):
 
 #     estado(update,context,cidade)
 
-def estado(update, context, city):
+def estado(update, context):
     import requests
 
-    askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
-    context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
+    # askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
+    # context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
     estado = 'Goiás'
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
-    cidade_resp = city
+    cidade_resp = update.message.text
     cod_muni = read_csv(cidade_resp,estado)
     context.bot.send_message(chat_id=update.effective_chat.id, text='O cod muni é: ' + cod_muni)
 
@@ -219,8 +219,8 @@ def main():
     conversation_handler = ConversationHandler(
         entry_points=[CommandHandler('iniciar', welcome)],
         states={
-            STATE1: [MessageHandler(Filters.text, inputFeedback)],
-            STATE2: [MessageHandler(Filters.text, inputFeedback2)]
+            STATE1: [MessageHandler(Filters.text, estado)],
+            STATE2: [MessageHandler(Filters.text, kalungas)]
         })
     updater.dispatcher.add_handler(conversation_handler)
 
