@@ -122,7 +122,7 @@ def read_csv(cidade,estado):
     uf = estado
 
     with open('municipio.csv') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
+        csv_reader = csv.reader(csv_file, delimiter=',', encoding='latin1')
         line_count = 0
 
         for row in csv_reader:
@@ -138,7 +138,7 @@ def cidade(update, context):
     import requests
 
 
-    askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalvante.\n\n'
+    askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
     cidade = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
