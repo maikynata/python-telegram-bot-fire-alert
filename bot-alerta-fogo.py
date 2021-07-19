@@ -155,7 +155,7 @@ def estado(update, context, city):
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
-    cidade_resp = 'Cavalcante'
+    cidade_resp = city
     cod_muni = read_csv(cidade_resp,estado)
     context.bot.send_message(chat_id=update.effective_chat.id, text='O cod muni é: ' + cod_muni)
 

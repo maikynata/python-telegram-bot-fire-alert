@@ -7,5 +7,6 @@ venv/*
 src/chave.py
 src/auxiliar.py
 maps.py
+encode-ok.txt
 import_csv.py
 __pycache__/
