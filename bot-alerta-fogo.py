@@ -199,22 +199,23 @@ def estado(update, context):
 
 
     askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
-    # context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
     
-    keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Goiás", callback_data='52'),
-            InlineKeyboardButton("Mato Grosso do Sul", callback_data='50'),
-            InlineKeyboardButton("Bahia", callback_data='29'),
-            InlineKeyboardButton("Maranhão", callback_data='21'),
-            InlineKeyboardButton("Distrito Federal", callback_data='53')]])
-    update.message.reply_text(askestado, reply_markup=keyboard)
+    # keyboard = InlineKeyboardMarkup(
+    #     [[InlineKeyboardButton("Goiás", callback_data='52'),
+    #         InlineKeyboardButton("Mato Grosso do Sul", callback_data='50'),
+    #         InlineKeyboardButton("Bahia", callback_data='29'),
+    #         InlineKeyboardButton("Maranhão", callback_data='21'),
+    #         InlineKeyboardButton("Distrito Federal", callback_data='53')]])
+    # update.message.reply_text(askestado, reply_markup=keyboard)
 
-    query = update.callback_query
-    print(str(query.data))
-    estado = 'Você escolheu o estado: ' + str(query.data)   
-    context.bot.send_message(chat_id=update.effective_chat.id, text=estado)
+    # query = update.callback_query
+    # print(str(query.data))
+    # estado = 'Você escolheu o estado: ' + str(query.data)   
+    # context.bot.send_message(chat_id=update.effective_chat.id, text=estado)
 
-    # context.bot.send_message(chat_id=update.effective_chat.id, text='Você escolheu estado: ' + estado)
+    estado = update.message.text
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o estado: ' + estado)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
@@ -270,7 +271,7 @@ def main():
         fallbacks=[CommandHandler('cancel', cancel)])
     updater.dispatcher.add_handler(conversation_handler)
 
-    updater.dispatcher.add_handler(CallbackQueryHandler(estado))
+    # updater.dispatcher.add_handler(CallbackQueryHandler(estado))
 
     updater.start_polling()
     print(str(updater))
