@@ -202,11 +202,11 @@ def estado(update, context):
     # context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
     
     keyboard = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Goiás", callback_data='1'),
-            InlineKeyboardButton("Mato Grosso do Sul", callback_data='2'),
-            InlineKeyboardButton("Bahia", callback_data='3'),
-            InlineKeyboardButton("Maranhão", callback_data='4'),
-            InlineKeyboardButton("Distrito Federal", callback_data='5')]])
+        [[InlineKeyboardButton("Goiás", callback_data='52'),
+            InlineKeyboardButton("Mato Grosso do Sul", callback_data='50'),
+            InlineKeyboardButton("Bahia", callback_data='29'),
+            InlineKeyboardButton("Maranhão", callback_data='21'),
+            InlineKeyboardButton("Distrito Federal", callback_data='53')]])
     update.message.reply_text(askestado, reply_markup=keyboard)
 
     query = update.callback_query
