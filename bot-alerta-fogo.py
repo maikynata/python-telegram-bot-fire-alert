@@ -120,7 +120,7 @@ def welcome(update, context):
 def kalungas(update, context):
     
     firstName = update.message.from_user.first_name
-    message = 'Olá, ' + firstName + '!'
+    message = 'Olá, ' + firstName + '! Aguarde um instante que estou verificando...'
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
@@ -141,7 +141,7 @@ def kalungas(update, context):
             message += localFoco(id, coordinatesURL)
             # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
-        message = 'Não há focos de incêndio registrados na região dos Kalungas'
+        message = 'Pronto, não há focos de incêndio registrados na região dos Kalungas nas últimas horas de hoje.'
         # message_linkall = linkAllFocos(id, coordinatesURL)
         # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
 
@@ -208,6 +208,7 @@ def estado(update, context):
     
     cod_muni = read_csv(cidade_resp,estado)
     context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de' + cidade_resp)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
