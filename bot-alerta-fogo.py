@@ -95,23 +95,23 @@ def welcome(update, context):
 
 
 def cidade_f(update, context):
-    # message = 'Olá '+ update.message.from_user.first_name +'!'
-    # print(message)
-    # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    message = 'Olá '+ update.message.from_user.first_name +'!'
+    print(message)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
-    try:
-        askcidade = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
-        update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-        return STATE1
-    except Exception as e:
-        print(str(e))
+    # try:
+    askcidade = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
+    #     update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
+    #     return STATE1
+    # except Exception as e:
+    #     print(str(e))
 
-    # context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
-    # cidade = update.message.text
+    context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
+    cidade = update.message.text
 
-    # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
 
-    # estado(update,context,cidade)
+    estado(update,context,cidade)
 
 
 def kalungas(update, context):
@@ -175,10 +175,11 @@ def read_csv(cidade,estado):
 
 #     estado(update,context,cidade)
 
-def estado(update, context):
+def estado(update, context, cidade):
 
-    cidade_resp = update.message.text
+    cidade_resp = cidade
     print(cidade_resp)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou resposta' + cidade_resp)
     
     if len(cidade_resp) < 3:
         message = """O nome da cidade está muito curto... 
@@ -193,6 +194,7 @@ def estado(update, context):
     askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
     estado = 'Goiás'
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou estado' + estado)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
