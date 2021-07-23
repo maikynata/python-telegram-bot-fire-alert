@@ -90,9 +90,12 @@ def welcome(update, context):
     # print(message)
     # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
-    askcidade = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
-    update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True)) 
-    return STATE1
+    try:
+        askcidade = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
+        update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True)) 
+        return STATE1
+    except Exception as e:
+        print(str(e))
 
     # context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
     # cidade = update.message.text
@@ -167,6 +170,16 @@ def estado(update, context):
 
     cidade_resp = update.message.text
     print(cidade_resp)
+    
+    if len(cidade_resp) < 3:
+        message = """O nome da cidade está muito curto... 
+                        \nInforma mais pra gente, por favor?"""
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        return STATE1
+    else:
+        message = "Muito obrigado!"
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
 
     askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
