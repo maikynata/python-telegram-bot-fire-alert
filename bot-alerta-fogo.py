@@ -101,7 +101,7 @@ def cidade_f(update, context):
 
     try:
         askcidade = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
-        update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True)) 
+        update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
         return STATE1
     except Exception as e:
         print(str(e))
