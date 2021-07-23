@@ -1,6 +1,6 @@
 import os
 import requests
-from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, RegexHandler
+from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from decimal import Decimal
 import csv
@@ -269,6 +269,8 @@ def main():
         },
         fallbacks=[CommandHandler('cancel', cancel)])
     updater.dispatcher.add_handler(conversation_handler)
+
+    updater.dispatcher.add_handler(CallbackQueryHandler(estado))
 
     updater.start_polling()
     print(str(updater))
