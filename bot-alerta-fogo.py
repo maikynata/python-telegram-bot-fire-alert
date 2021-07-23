@@ -1,7 +1,7 @@
 import os
 import requests
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, RegexHandler
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from decimal import Decimal
 import csv
 
@@ -199,20 +199,33 @@ def estado(update, context):
 
 
     askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
-    context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
-    estado = 'Goiás'
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou estado: ' + estado)
+    # context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
+    
+    keyboard = InlineKeyboardMarkup(
+        [[InlineKeyboardButton("Goiás", callback_data='1'),
+            InlineKeyboardButton("Mato Grosso do Sul", callback_data='2'),
+            InlineKeyboardButton("Bahia", callback_data='3'),
+            InlineKeyboardButton("Maranhão", callback_data='4'),
+            InlineKeyboardButton("Distrito Federal", callback_data='5')]])
+    update.message.reply_text(askestado, reply_markup=keyboard)
+
+    query = update.callback_query
+    print(str(query.data))
+    estado = 'Você escolheu o estado: ' + str(query.data)   
+    context.bot.send_message(chat_id=update.effective_chat.id, text=estado)
+
+    # context.bot.send_message(chat_id=update.effective_chat.id, text='Você escolheu estado: ' + estado)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
     cod_muni = read_csv(cidade_resp,estado)
     context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de' + cidade_resp)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
-    estado_id = int(52)
+    estado_id = int(estado)
     municipio = int(cod_muni)
 
     coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
