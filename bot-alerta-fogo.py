@@ -226,7 +226,7 @@ def estado(update, context):
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
-    estado_id = int(estado)
+    estado_id = int(52)
     municipio = int(cod_muni)
 
     coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
