@@ -174,9 +174,9 @@ def read_csv(cidade,estado):
 
 #     estado(update,context,cidade)
 
-def estado(update, context, cidade):
+def estado(update, context):
 
-    cidade_resp = cidade
+    cidade_resp = update.message.text
     print(cidade_resp)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou resposta' + cidade_resp)
     
