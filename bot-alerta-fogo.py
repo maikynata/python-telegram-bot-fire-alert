@@ -142,6 +142,7 @@ def kalungas(update, context):
     #print(message_linkall)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
+    return ConversationHandler.END
 
 def read_csv(cidade,estado):
 
@@ -222,6 +223,7 @@ def estado(update, context):
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
+    return ConversationHandler.END
 
 
 def ajuda(update, context):
