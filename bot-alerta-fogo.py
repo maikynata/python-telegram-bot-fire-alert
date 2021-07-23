@@ -136,16 +136,16 @@ def kalungas(update, context):
         message = 'O número de supostos focos de incêndio na região dos Kalungas é de {}\n'.format(focos)
         for id in municipios:
             message += localFoco(id, coordinatesURL)
-            message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
+            # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
         message = 'Não há focos de incêndio registrados na região dos Kalungas'
         # message_linkall = linkAllFocos(id, coordinatesURL)
-        message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
+        # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
 
     # print(message)
     # print(message_linkall)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
+    # context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
     return ConversationHandler.END
 
 def read_csv(cidade,estado):
@@ -183,7 +183,7 @@ def estado(update, context):
 
     cidade_resp = update.message.text
     print(cidade_resp)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou resposta' + cidade_resp)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você respondeu a cidade: ' + cidade_resp)
     
     if len(cidade_resp) < 3:
         message = """O nome da cidade está muito curto... 
@@ -198,7 +198,7 @@ def estado(update, context):
     askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
     estado = 'Goiás'
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou estado' + estado)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou estado: ' + estado)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
@@ -220,13 +220,11 @@ def estado(update, context):
     if focos > 0:
         message = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
         message += localFoco(cod_muni, coordinatesURL)
-        message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
         message = 'Não há focos de incêndio registrados na região deste Município'
 
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
     return ConversationHandler.END
 
 
