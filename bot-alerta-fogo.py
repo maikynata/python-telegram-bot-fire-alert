@@ -235,14 +235,14 @@ def main():
     token = os.environ['TOKEN']
     updater = Updater(token=token, use_context=True)
 
-    updater.dispatcher.add_handler(CommandHandler('iniciar', cidade_f))
-    updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
-    # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
-    updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
+    updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
+    # updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
+    # # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
+    # updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
     # updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
 
     conversation_handler = ConversationHandler(
-        entry_points=[CommandHandler('iniciar', cidade_f)],
+        entry_points=[CommandHandler('cidade_f', cidade_f)],
         states={
             STATE1: [MessageHandler(Filters.text, estado)],
             STATE2: [MessageHandler(Filters.text, kalungas)]
