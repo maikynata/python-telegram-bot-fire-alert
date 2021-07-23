@@ -118,7 +118,10 @@ def welcome(update, context):
 
 
 def kalungas(update, context):
-    import requests
+    
+    firstName = update.message.from_user.first_name
+    message = 'Olá, ' + firstName + '!'
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
@@ -204,7 +207,7 @@ def estado(update, context):
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
     cod_muni = read_csv(cidade_resp,estado)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='O cod muni é: ' + cod_muni)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
@@ -240,7 +243,7 @@ def main():
     updater = Updater(token=token, use_context=True)
 
     # updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
-    # updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
+    updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
     # # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
     # updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
     # updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
@@ -248,8 +251,7 @@ def main():
     conversation_handler = ConversationHandler(
         entry_points=[CommandHandler('iniciar', welcome)],
         states={
-            STATE1: [MessageHandler(Filters.text, estado)],
-            STATE2: [MessageHandler(Filters.text, kalungas)]
+            STATE1: [MessageHandler(Filters.text, estado)]
         },
         fallbacks=[CommandHandler('cancel', cancel)])
     updater.dispatcher.add_handler(conversation_handler)
