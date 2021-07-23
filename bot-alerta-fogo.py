@@ -95,23 +95,22 @@ def welcome(update, context):
 
 
 def cidade_f(update, context):
-    message = 'Olá '+ update.message.from_user.first_name +'!'
-    print(message)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    # message = 'Olá '+ update.message.from_user.first_name +'!'
+    # print(message)
+    # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
-    # try:
-    askcidade = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
-    #     update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-    #     return STATE1
-    # except Exception as e:
-    #     print(str(e))
+    try:
+        message = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
+        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
+        return STATE1
+    except Exception as e:
+        print(str(e))
 
-    context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
-    cidade = update.message.text
+    # cidade = update.message.text
 
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+    # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
 
-    estado(update,context,cidade)
+    # estado(update,context,cidade)
 
 
 def kalungas(update, context):
