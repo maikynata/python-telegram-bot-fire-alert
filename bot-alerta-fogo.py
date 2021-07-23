@@ -86,6 +86,15 @@ def transformaDecimalGrau(grau):
 
 
 def welcome(update, context):
+    try:
+        firstName = update.message.from_user.first_name
+        message = 'Olá, ' + firstName + '!'
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    except Exception as e:
+        print(str(e))
+
+
+def cidade_f(update, context):
     # message = 'Olá '+ update.message.from_user.first_name +'!'
     # print(message)
     # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
@@ -225,14 +234,14 @@ def main():
     token = os.environ['TOKEN']
     updater = Updater(token=token, use_context=True)
 
-    updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
+    updater.dispatcher.add_handler(CommandHandler('iniciar', cidade_f))
     updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
     # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
     updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
     # updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
 
     conversation_handler = ConversationHandler(
-        entry_points=[CommandHandler('iniciar', welcome)],
+        entry_points=[CommandHandler('iniciar', cidade_f)],
         states={
             STATE1: [MessageHandler(Filters.text, estado)],
             STATE2: [MessageHandler(Filters.text, kalungas)]
