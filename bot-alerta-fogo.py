@@ -1,6 +1,6 @@
 import os
 import requests
-from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, RegexHandler
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 from decimal import Decimal
 import csv
@@ -86,11 +86,9 @@ def transformaDecimalGrau(grau):
 
 
 def welcome(update, context):
-    message = 'Olá '+ update.message.from_user.first_name +'!'
-    print(message)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-
-    import requests
+    # message = 'Olá '+ update.message.from_user.first_name +'!'
+    # print(message)
+    # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
     askcidade = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
     update.message.reply_text(askcidade, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True)) 
@@ -166,7 +164,9 @@ def read_csv(cidade,estado):
 #     estado(update,context,cidade)
 
 def estado(update, context):
-    import requests
+
+    cidade_resp = update.message.text
+    print(cidade_resp)
 
     askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
     context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
@@ -175,7 +175,6 @@ def estado(update, context):
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
-    cidade_resp = update.message.text
     cod_muni = read_csv(cidade_resp,estado)
     context.bot.send_message(chat_id=update.effective_chat.id, text='O cod muni é: ' + cod_muni)
 
