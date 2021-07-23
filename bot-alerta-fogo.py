@@ -244,8 +244,8 @@ def main():
 
     # updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
     updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
-    # # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
-    # updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
+    # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
+    updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
     # updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
 
     conversation_handler = ConversationHandler(
