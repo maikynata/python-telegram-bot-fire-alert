@@ -85,21 +85,25 @@ def transformaDecimalGrau(grau):
     return coordenada 
 
 
+# def welcome(update, context):
+#     try:
+#         firstName = update.message.from_user.first_name
+#         message = 'Olá, ' + firstName + '!'
+#         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+#     except Exception as e:
+#         print(str(e))
+
+
 def welcome(update, context):
-    try:
-        firstName = update.message.from_user.first_name
-        message = 'Olá, ' + firstName + '!'
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-    except Exception as e:
-        print(str(e))
-
-
-def cidade_f(update, context):
     # message = 'Olá '+ update.message.from_user.first_name +'!'
     # print(message)
     # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
     try:
+        firstName = update.message.from_user.first_name
+        message = 'Olá, ' + firstName + '!'
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
         message = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
         update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
         return STATE1
@@ -138,8 +142,8 @@ def kalungas(update, context):
         # message_linkall = linkAllFocos(id, coordinatesURL)
         message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
 
-    print(message)
-    #print(message_linkall)
+    # print(message)
+    # print(message_linkall)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
     return ConversationHandler.END
@@ -237,14 +241,14 @@ def main():
     token = os.environ['TOKEN']
     updater = Updater(token=token, use_context=True)
 
-    updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
+    # updater.dispatcher.add_handler(CommandHandler('iniciar', welcome))
     # updater.dispatcher.add_handler(CommandHandler('kalungas', kalungas))
     # # updater.dispatcher.add_handler(CommandHandler('cidade', cidade))
     # updater.dispatcher.add_handler(CommandHandler('ajuda', ajuda))
     # updater.dispatcher.add_handler(MessageHandler(Filters.text, cidade))
 
     conversation_handler = ConversationHandler(
-        entry_points=[CommandHandler('cidade_f', cidade_f)],
+        entry_points=[CommandHandler('iniciar', welcome)],
         states={
             STATE1: [MessageHandler(Filters.text, estado)],
             STATE2: [MessageHandler(Filters.text, kalungas)]
