@@ -196,11 +196,14 @@ def estado(update, context):
     else:
         message = "Muito obrigado!"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        result_focos(update, context, cidade_resp)
 
 
+
+def result_focos(update, context, cidade_resp):
     message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
     update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-    
+
     # keyboard = InlineKeyboardMarkup(
     #     [[InlineKeyboardButton("Goiás", callback_data='52'),
     #         InlineKeyboardButton("Mato Grosso do Sul", callback_data='50'),
