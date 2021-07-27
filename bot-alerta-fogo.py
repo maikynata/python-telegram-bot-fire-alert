@@ -217,13 +217,13 @@ def result_focos(update, context, cidade_resp):
     # estado = 'Você escolheu o estado: ' + str(query.data)   
     # context.bot.send_message(chat_id=update.effective_chat.id, text=estado)
 
-    estado_resp = update.message.reply_text
+    estado_resp = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o estado: ' + estado_resp)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
-    cod_muni = read_csv(cidade_resp,estado)
+    cod_muni = read_csv(cidade_resp,estado_resp)
     context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
 
