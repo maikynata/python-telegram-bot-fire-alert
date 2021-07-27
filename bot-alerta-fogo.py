@@ -217,8 +217,8 @@ def result_focos(update, context, cidade_resp):
     # estado = 'Você escolheu o estado: ' + str(query.data)   
     # context.bot.send_message(chat_id=update.effective_chat.id, text=estado)
 
-    estado = update.message.reply_text
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o estado: ' + estado)
+    estado_resp = update.message.reply_text
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o estado: ' + estado_resp)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
