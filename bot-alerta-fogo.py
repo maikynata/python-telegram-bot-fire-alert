@@ -198,8 +198,8 @@ def estado(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
 
-    askestado = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
-    context.bot.send_message(chat_id=update.effective_chat.id, text=askestado)
+    message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
+    update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
     
     # keyboard = InlineKeyboardMarkup(
     #     [[InlineKeyboardButton("Goiás", callback_data='52'),
@@ -214,7 +214,7 @@ def estado(update, context):
     # estado = 'Você escolheu o estado: ' + str(query.data)   
     # context.bot.send_message(chat_id=update.effective_chat.id, text=estado)
 
-    estado = 'Goiás'
+    estado = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o estado: ' + estado)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
