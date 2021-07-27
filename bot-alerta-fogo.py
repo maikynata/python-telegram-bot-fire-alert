@@ -199,8 +199,20 @@ def estado(update, context):
 
 
 
+
 def result_focos(update, context):
     cidade_resp = update.message.text
+
+    if len(cidade_resp) < 3:
+        message = """O nome da cidade está muito curto... 
+                        \nInforma mais pra gente, por favor?"""
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        return STATE1
+    else:
+        message = "Muito obrigado!"
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
+
     message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
     update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
 
@@ -217,7 +229,7 @@ def result_focos(update, context):
     # estado = 'Você escolheu o estado: ' + str(query.data)   
     # context.bot.send_message(chat_id=update.effective_chat.id, text=estado)
 
-    estado = update.message.text
+    estado = update.message.reply_text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o estado: ' + estado)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
