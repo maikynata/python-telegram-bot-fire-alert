@@ -206,7 +206,7 @@ def result_focos(update, context):
 
     try:
         message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás\n\n'
-        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
+        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=False))
     except Exception as e:
         print(str(e))
 
