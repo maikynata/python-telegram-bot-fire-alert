@@ -194,16 +194,16 @@ def estado(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE1
     else:
-        message = "Muito obrigado! Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás"
+        message = "Muito obrigado!"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        return STATE2
+        result_focos(update, context, cidade_resp)
 
 
-def result_focos(update, context):
+def result_focos(update, context, cidade):
 
-    cidade_resp = update.message.text
+    cidade_resp = cidade
     try:
-        message = 'Obrigado!.\n\n'
+        message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás\n\n'
         update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
     except Exception as e:
         print(str(e))
