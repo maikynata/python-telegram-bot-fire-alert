@@ -196,7 +196,6 @@ def estado(update, context):
     else:
         message = "Muito obrigado!"
         update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-        return STATE2
 
 
 
