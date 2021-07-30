@@ -195,8 +195,7 @@ def estado(update, context):
         return STATE1
     else:
         message = "Muito obrigado! Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás"
-        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=False))
-        estado_resp = update.message.text
+        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
         result_focos(update, context, cidade_resp)
 
 
@@ -207,7 +206,7 @@ def result_focos(update, context, cidade_resp):
 
     # try:
     #     message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás\n\n'
-    #     update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=False))
+    #     update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
     # except Exception as e:
     #     print(str(e))
 
