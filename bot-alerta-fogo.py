@@ -197,12 +197,18 @@ def estado(update, context):
         message = "Muito obrigado!"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         result_focos(update, context, cidade_resp)
+        return STATE2
 
 
 
-def result_focos(update, context, cidade_resp):
-    message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.'
-    update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
+def result_focos(update, context):
+    cidade_resp = update.message.text
+    try:
+        message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás.\n\n'
+        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
+        return STATE1
+    except Exception as e:
+        print(str(e))
 
     # keyboard = InlineKeyboardMarkup(
     #     [[InlineKeyboardButton("Goiás", callback_data='52'),
@@ -269,7 +275,8 @@ def main():
     conversation_handler = ConversationHandler(
         entry_points=[CommandHandler('iniciar', welcome)],
         states={
-            STATE1: [MessageHandler(Filters.text, estado)]
+            STATE1: [MessageHandler(Filters.text, estado)],
+            STATE2: [MessageHandler(Filters.text, result_focos)]
         },
         fallbacks=[CommandHandler('cancel', cancel)])
     updater.dispatcher.add_handler(conversation_handler)
