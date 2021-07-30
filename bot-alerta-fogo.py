@@ -195,8 +195,8 @@ def estado(update, context):
         return STATE1
     else:
         message = "Muito obrigado!"
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        return STATE1
+        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=False))
+        return STATE2
 
 
 def result_focos(update, context):
