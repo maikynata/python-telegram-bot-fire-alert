@@ -201,7 +201,7 @@ def estado(update, context):
 
 def result_focos(update, context):
 
-    # cidade_resp = update.message.text
+    cidade_resp = update.message.text
     # print(cidade_resp)
 
     # try:
