@@ -194,8 +194,7 @@ def estado(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE1
     else:
-        message = "Muito obrigado!"
-        "Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás"
+        message = "Muito obrigado! Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE2
 
