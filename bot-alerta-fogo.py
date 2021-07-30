@@ -196,7 +196,6 @@ def estado(update, context):
     else:
         message = "Muito obrigado!"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        result_focos(update, context, cidade_resp)
         return STATE2
 
 
