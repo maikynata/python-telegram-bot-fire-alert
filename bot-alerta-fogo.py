@@ -196,7 +196,7 @@ def estado(update, context):
     else:
         message = "Muito obrigado!"
         update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-
+        return STATE2
 
 
 def result_focos(update, context):
@@ -274,9 +274,10 @@ def main():
         entry_points=[CommandHandler('iniciar', welcome)],
         states={
             STATE1: [MessageHandler(Filters.text, estado)],
-            STATE2: [MessageHandler(Filters.text, result_focos)]
+            STATE2: [MessageHandler(Filters.text, result_focos)],
         },
-        fallbacks=[CommandHandler('cancel', cancel)])
+        fallbacks=[CommandHandler('cancel', cancel)],)
+        
     updater.dispatcher.add_handler(conversation_handler)
 
     # updater.dispatcher.add_handler(CallbackQueryHandler(estado))
