@@ -195,11 +195,11 @@ def estado(update, context):
         return STATE1
     else:
         message = "Muito obrigado! Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás"
-        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-        result_focos(update, context, cidade_resp)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        return STATE2
 
 
-def result_focos(update, context, cidade_resp):
+def result_focos(update, context):
 
     # cidade_resp = update.message.text
     # print(cidade_resp)
