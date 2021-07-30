@@ -201,11 +201,12 @@ def estado(update, context):
 
 def result_focos(update, context):
 
-    cidade_resp = update.message.user_data
+    cidade_resp = context.user_data
     print(cidade_resp)
+
     try:
         message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás\n\n'
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
     except Exception as e:
         print(str(e))
 
