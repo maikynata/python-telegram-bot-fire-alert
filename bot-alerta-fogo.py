@@ -215,6 +215,7 @@ def estado(update, context):
                 InlineKeyboardButton("AC", callback_data='12'),]])
         update.message.reply_text(question, reply_markup=keyboard)
 
+        regiao_norte = 'Região Norte:'
         keyboard2 = InlineKeyboardMarkup(
                 [[InlineKeyboardButton("AM", callback_data='13'),
                 InlineKeyboardButton("RR", callback_data='14'),
@@ -228,7 +229,7 @@ def estado(update, context):
                 InlineKeyboardButton("MA", callback_data='21'),
                 InlineKeyboardButton("MA", callback_data='21'),
                 InlineKeyboardButton("MA", callback_data='21'),]])
-        update.message.reply_text(question, reply_markup=keyboard2)
+        update.message.reply_text(regiao_norte, reply_markup=keyboard2)
     except Exception as e:
             print(str(e))
         
