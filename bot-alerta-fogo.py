@@ -179,10 +179,10 @@ def read_csv_estado(estado):
 
         for row in csv_reader:
             line_count = 0
-            if row[1] == uf:
+            if row[0] == uf:
                 # print(f'O código do municipio é: {row[2]}.')
-                cod_estado = row[0]
-                return cod_estado
+                estado_nome = row[1]
+                return estado_nome
             line_count += 1
 
 
@@ -199,7 +199,7 @@ def estado(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE1
     else:
-        message = "Muito obrigado! Agora digite o nome por extenso, o nome do estado deste município. Exemplo: Goiás"
+        message = "Muito obrigado! Agora digite por extenso, o nome do estado deste município. Exemplo: Goiás"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         
     try:
@@ -222,12 +222,6 @@ def result_focos(update, context):
     cidade_resp = context.user_data["city"]
     print("Cidade do context.user_data: " + cidade_resp)
 
-    # try:
-    #     message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás\n\n'
-    #     update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-    # except Exception as e:
-    #     print(str(e))
-
     try:
         cidade = context.user_data["city"]
         message = 'Você digitou a cidade: ' + cidade
@@ -240,13 +234,13 @@ def result_focos(update, context):
         print(str(e))
     
 
-    estado_resp = update.message.text
-    print("Cidade do update.message.text: " + estado_resp)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o Estado: ' + estado_resp)
+    cod_estado = str(query.data)
+    print("Estado selecionado no menu query.data: " + cod_estado)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você escolheu no menu o Estado: ' + cod_estado)
 
+    estado_nome = read_csv_estado(cod_estado)
     
-    cod_muni = read_csv_cidade(cidade_resp,estado_resp)
-    cod_estado = read_csv_estado(estado_resp)
+    cod_muni = read_csv_cidade(cidade_resp,estado_nome)
     
     context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
