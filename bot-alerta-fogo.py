@@ -184,7 +184,8 @@ def read_csv(cidade,estado):
 
 def estado(update, context):
 
-    cidade_resp = update.message.text
+    context.user_data["city"] = update.message.text
+    cidade_resp = context.user_data["city"]
     print(cidade_resp)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você respondeu a cidade: ' + cidade_resp)
     
@@ -259,10 +260,9 @@ def askForEstado(update, context):
 
 def getNota(update, context):
     try:
-        cidade = update.message.text
-        message = 'Você digitou a cidade: ' + cidade
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        
+        # cidade = update.message.text
+        # message = 'Você digitou a cidade: ' + cidade
+        # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         query = update.callback_query
         print(str(query.data))
         message = 'Você escolheu o Estado: ' + str(query.data) 
