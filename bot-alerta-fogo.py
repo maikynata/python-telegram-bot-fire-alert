@@ -7,6 +7,7 @@ import csv
 
 STATE1 = 1
 STATE2 = 2
+STATE3 = 3
 
 def contaFoco(cidade, count):
     count += '&municipio_id={}'.format(cidade)
@@ -295,6 +296,7 @@ def main():
         states={
             STATE1: [MessageHandler(Filters.text, estado)],
             STATE2: [MessageHandler(Filters.text, result_focos)],
+            STATE3: [MessageHandler(Filters.text, askForEstado)],
         },
         fallbacks=[CommandHandler('cancel', cancel)])
     updater.dispatcher.add_handler(conversation_handler)
