@@ -199,7 +199,7 @@ def estado(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE1
     else:
-        message = "Muito obrigado! Agora digite por extenso, o nome do estado deste município. Exemplo: Goiás"
+        message = "Muito obrigado!"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         
     try:
@@ -223,23 +223,19 @@ def result_focos(update, context):
     print("Cidade do context.user_data: " + cidade_resp)
 
     try:
-        cidade = context.user_data["city"]
-        message = 'Você digitou a cidade: ' + cidade
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         query = update.callback_query
         print(str(query.data))
-        message = 'Você escolheu o Estado: ' + str(query.data) 
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        # message = 'Você escolheu o Estado: ' + str(query.data) 
+        # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     except Exception as e: 
         print(str(e))
         return ConversationHandler.END
     
-
     cod_estado = str(query.data)
-    print("Estado selecionado no menu query.data: " + cod_estado)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você escolheu no menu o Estado: ' + cod_estado)
-
     estado_nome = read_csv_estado(cod_estado)
+
+    print("Estado selecionado no menu query.data: " + cod_estado)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você escolheu no menu o Estado: ' + estado_nome)
     
     cod_muni = read_csv_cidade(cidade_resp,estado_nome)
     
