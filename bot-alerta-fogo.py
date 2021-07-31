@@ -196,7 +196,7 @@ def estado(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE1
     else:
-        message = "Muito obrigado!"
+        message = "Muito obrigado! Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE2
 
@@ -206,15 +206,15 @@ def result_focos(update, context):
     cidade_resp = context.user_data["city"]
     print("Cidade do context.user_data: " + cidade_resp)
 
-    try:
-        message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás\n\n'
-        update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-    except Exception as e:
-        print(str(e))
+    # try:
+    #     message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás\n\n'
+    #     update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
+    # except Exception as e:
+    #     print(str(e))
 
     estado_resp = update.message.text
     print(estado_resp)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou a cidade: ' + estado_resp)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou a cidade: ' + cidade_resp)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Agora digite o estado: ' + estado_resp)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
