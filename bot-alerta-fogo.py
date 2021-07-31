@@ -215,12 +215,34 @@ def result_focos(update, context):
     # except Exception as e:
     #     print(str(e))
 
+    try:
+        question = 'Agora clique no Estado desta cidade:'
+        keyboard = InlineKeyboardMarkup(
+            [[InlineKeyboardButton("GO", callback_data='52'),
+                InlineKeyboardButton("MS", callback_data='50'),
+                InlineKeyboardButton("BA", callback_data='29'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("DF", callback_data='53')]])
+        update.message.reply_text(question, reply_markup=keyboard)
+    except Exception as e:
+        print(str(e))
+
+    try:
+        cidade = context.user_data["city"]
+        message = 'Você digitou a cidade: ' + cidade
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        query = update.callback_query
+        print(str(query.data))
+        message = 'Você escolheu o Estado: ' + str(query.data) 
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    except Exception as e:
+        print(str(e))
+    
+
     estado_resp = update.message.text
     print("Cidade do update.message.text: " + estado_resp)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o Estado: ' + estado_resp)
 
-    # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
-    # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
     cod_muni = read_csv_cidade(cidade_resp,estado_resp)
     cod_estado = read_csv_estado(estado_resp)
@@ -315,7 +337,7 @@ def main():
     updater.dispatcher.add_handler(conversation_handler)
 
     updater.dispatcher.add_handler(CommandHandler('nota', askForEstado))
-    updater.dispatcher.add_handler(CallbackQueryHandler(getNota))
+    updater.dispatcher.add_handler(CallbackQueryHandler(result_focos))
 
 
     updater.start_polling()
