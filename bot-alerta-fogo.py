@@ -203,7 +203,7 @@ def estado(update, context):
 def result_focos(update, context):
 
     cidade_resp = context.user_data["city"]
-    print("Cidade do context.user_data" + cidade_resp)
+    print("Cidade do context.user_data: " + cidade_resp)
 
     try:
         message = 'Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás\n\n'
