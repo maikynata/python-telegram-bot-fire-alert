@@ -210,19 +210,6 @@ def result_focos(update, context):
     # except Exception as e:
     #     print(str(e))
 
-    # keyboard = InlineKeyboardMarkup(
-    #     [[InlineKeyboardButton("Goiás", callback_data='52'),
-    #         InlineKeyboardButton("Mato Grosso do Sul", callback_data='50'),
-    #         InlineKeyboardButton("Bahia", callback_data='29'),
-    #         InlineKeyboardButton("Maranhão", callback_data='21'),
-    #         InlineKeyboardButton("Distrito Federal", callback_data='53')]])
-    # update.message.reply_text(askestado, reply_markup=keyboard)
-
-    # query = update.callback_query
-    # print(str(query.data))
-    # estado = 'Você escolheu o estado: ' + str(query.data)   
-    # context.bot.send_message(chat_id=update.effective_chat.id, text=estado)
-
     estado_resp = update.message.text
     print(estado_resp)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o estado: ' + estado_resp)
@@ -277,9 +264,13 @@ def askForEstado(update, context):
 
 def getNota(update, context):
     try:
+        cidade = update.message.text
+        message = 'Você digitou a cidade: ' + cidade
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        
         query = update.callback_query
         print(str(query.data))
-        message = 'Obrigada pela sua nota: ' + str(query.data) 
+        message = 'Você escolheu o Estado: ' + str(query.data) 
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     except Exception as e:
         print(str(e))
