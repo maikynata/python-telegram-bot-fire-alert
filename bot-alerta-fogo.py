@@ -152,7 +152,7 @@ def kalungas(update, context):
     # context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
     return ConversationHandler.END
 
-def read_csv(cidade,estado):
+def read_csv_cidade(cidade,estado):
 
     muni = cidade
     uf = estado
@@ -165,23 +165,26 @@ def read_csv(cidade,estado):
             line_count = 0
             if row[0] == muni and row[1] == uf:
                 # print(f'O código do municipio é: {row[2]}.')
-                cod_muni=row[2]
+                cod_muni = row[2]
                 return cod_muni
             line_count += 1
 
+def read_csv_estado(estado):
 
-# def cidade(update, context):
-#     import requests
+    uf = estado
 
-#     cidade = 'NA'
-#     while (cidade == 'NA'):
-#         askcidade = 'Olá, digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
-#         context.bot.send_message(chat_id=update.effective_chat.id, text=askcidade)
-#         cidade = update.message.text
+    with open('estados.csv', encoding="latin1") as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
 
-#     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
+        for row in csv_reader:
+            line_count = 0
+            if row[1] == uf:
+                # print(f'O código do municipio é: {row[2]}.')
+                cod_estado = row[0]
+                return cod_estado
+            line_count += 1
 
-#     estado(update,context,cidade)
 
 def estado(update, context):
 
@@ -219,14 +222,15 @@ def result_focos(update, context):
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
-    cod_muni = read_csv(cidade_resp,estado_resp)
+    cod_muni = read_csv_cidade(cidade_resp,estado_resp)
+    cod_estado = read_csv_estado(estado_resp)
     
     context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
-    estado_id = int(52)
+    estado_id = int(cod_estado)
     municipio = int(cod_muni)
 
     coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
