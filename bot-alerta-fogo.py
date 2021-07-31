@@ -282,9 +282,11 @@ def getNota(update, context):
 
 
 def ajuda(update, context):
-    message = 'Os dados apresentados pelo Labareda Alerta são atualizados a cada 3 horas, nos seguintes horários: '
-    '00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 (UTC) Conforme o site http://queimadas.dgi.inpe.br.'
-    'Utilize'
+    message = """Os dados apresentados pelo Labareda Alerta são atualizados a cada 3 horas, nos seguintes horários: 
+    \n00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 (UTC) Conforme o site http://queimadas.dgi.inpe.br.\n\n
+    - Utilize o menu para fazer as consultas:\n
+    /iniciar - Para consultar focos de qualquer cidade do Brasil
+    /kalungas - Para consultar os focos da região Kalunga"""
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     return ConversationHandler.END
 
