@@ -1,5 +1,4 @@
 import os
-from typing import type_check_only
 import requests
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
@@ -221,36 +220,29 @@ def result_focos(update, context):
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
     
     cod_muni = read_csv(cidade_resp,estado_resp)
+    
+    context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
 
-    if isinstance(cod_muni, str):
+    baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
+    pais_id = int(33)
+    estado_id = int(52)
+    municipio = int(cod_muni)
 
-        context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
+    coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
+    countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
 
-        baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
-        pais_id = int(33)
-        estado_id = int(52)
-        municipio = int(cod_muni)
-
-        coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
-        countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
-
-        focos = 0
-        focos += contaFoco(cod_muni, countURL)
-            
-        if focos > 0:
-            message = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
-            message += localFoco(cod_muni, coordinatesURL)
-        else:
-            message = 'Não há focos de incêndio registrados na região deste Município'
-
-        print(message)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    focos = 0
+    focos += contaFoco(cod_muni, countURL)
+        
+    if focos > 0:
+        message = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
+        message += localFoco(cod_muni, coordinatesURL)
     else:
-        message = 'O nome da cidade e/ou estado estão incorretos'
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        return STATE1
+        message = 'Não há focos de incêndio registrados na região deste Município'
 
+    print(message)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     return ConversationHandler.END
 
 
