@@ -230,8 +230,9 @@ def result_focos(update, context):
         print(str(query.data))
         message = 'Você escolheu o Estado: ' + str(query.data) 
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-    except Exception as e:
+    except Exception as e: 
         print(str(e))
+        return ConversationHandler.END
     
 
     cod_estado = str(query.data)
