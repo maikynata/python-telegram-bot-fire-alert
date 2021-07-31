@@ -264,35 +264,8 @@ def result_focos(update, context):
     print(message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
     context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+    
     return ConversationHandler.END
-
-
-def askForEstado(update, context):
-    try:
-        question = 'Agora clique no Estado desta cidade:'
-        keyboard = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("GO", callback_data='52'),
-                InlineKeyboardButton("MS", callback_data='50'),
-                InlineKeyboardButton("BA", callback_data='29'),
-                InlineKeyboardButton("MA", callback_data='21'),
-                InlineKeyboardButton("DF", callback_data='53')]])
-        update.message.reply_text(question, reply_markup=keyboard)
-    except Exception as e:
-        print(str(e))
-
-
-def getNota(update, context):
-    try:
-        cidade = context.user_data["city"]
-        message = 'Você digitou a cidade: ' + cidade
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        query = update.callback_query
-        print(str(query.data))
-        message = 'Você escolheu o Estado: ' + str(query.data) 
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-    except Exception as e:
-        print(str(e))
-
 
 
 def ajuda(update, context):
@@ -323,12 +296,11 @@ def main():
         states={
             STATE1: [MessageHandler(Filters.text, estado)],
             STATE2: [MessageHandler(Filters.text, result_focos)],
-            STATE3: [MessageHandler(Filters.text, askForEstado)],
+            STATE3: [MessageHandler(Filters.text, ajuda)],
         },
         fallbacks=[CommandHandler('cancel', cancel)])
     updater.dispatcher.add_handler(conversation_handler)
 
-    updater.dispatcher.add_handler(CommandHandler('nota', askForEstado))
     updater.dispatcher.add_handler(CallbackQueryHandler(result_focos))
 
 
