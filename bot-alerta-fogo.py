@@ -4,7 +4,6 @@ import requests
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from decimal import Decimal
-from typing import type_check_only
 import csv
 
 STATE1 = 1
@@ -223,7 +222,7 @@ def result_focos(update, context):
     
     cod_muni = read_csv(cidade_resp,estado_resp)
 
-    if type(cod_muni) is str:
+    if isinstance(cod_muni, str):
 
         context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
         context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
