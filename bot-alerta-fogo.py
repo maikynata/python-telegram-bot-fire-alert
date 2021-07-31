@@ -261,15 +261,15 @@ def ajuda(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
 
-def askForNota(update, context):
+def askForEstado(update, context):
     try:
-        question = 'Qual nota você dá para o tutorial?'
+        question = 'Agora clique no Estado desta cidade:'
         keyboard = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("👎 1", callback_data='1'),
-              InlineKeyboardButton("2", callback_data='2'),
-              InlineKeyboardButton("🤔 3", callback_data='3'),
-              InlineKeyboardButton("4", callback_data='4'),
-              InlineKeyboardButton("👍 5", callback_data='5')]])
+            [[InlineKeyboardButton("GO", callback_data='52'),
+                InlineKeyboardButton("MS", callback_data='50'),
+                InlineKeyboardButton("BA", callback_data='29'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("DF", callback_data='53')]])
         update.message.reply_text(question, reply_markup=keyboard)
     except Exception as e:
         print(str(e))
@@ -308,7 +308,7 @@ def main():
         fallbacks=[CommandHandler('cancel', cancel)])
     updater.dispatcher.add_handler(conversation_handler)
 
-    updater.dispatcher.add_handler(CommandHandler('nota', askForNota))
+    updater.dispatcher.add_handler(CommandHandler('nota', askForEstado))
     updater.dispatcher.add_handler(CallbackQueryHandler(getNota))
 
     # updater.dispatcher.add_handler(CallbackQueryHandler(estado))
