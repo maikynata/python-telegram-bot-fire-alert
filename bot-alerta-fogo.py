@@ -201,7 +201,20 @@ def estado(update, context):
     else:
         message = "Muito obrigado! Agora digite o nome por extenso, o nome do estado deste município. Exemplo: Goiás"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        return STATE2
+        
+    try:
+        question = 'Agora clique no Estado desta cidade:'
+        keyboard = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("GO", callback_data='52'),
+                InlineKeyboardButton("MS", callback_data='50'),
+                InlineKeyboardButton("BA", callback_data='29'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("DF", callback_data='53')]])
+        update.message.reply_text(question, reply_markup=keyboard)
+    except Exception as e:
+            print(str(e))
+        
+    return STATE2
 
 
 def result_focos(update, context):
@@ -214,18 +227,6 @@ def result_focos(update, context):
     #     update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
     # except Exception as e:
     #     print(str(e))
-
-    try:
-        question = 'Agora clique no Estado desta cidade:'
-        keyboard = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("GO", callback_data='52'),
-                InlineKeyboardButton("MS", callback_data='50'),
-                InlineKeyboardButton("BA", callback_data='29'),
-                InlineKeyboardButton("MA", callback_data='21'),
-                InlineKeyboardButton("DF", callback_data='53')]])
-        update.message.reply_text(question, reply_markup=keyboard)
-    except Exception as e:
-        print(str(e))
 
     try:
         cidade = context.user_data["city"]
