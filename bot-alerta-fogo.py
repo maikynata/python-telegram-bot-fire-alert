@@ -121,7 +121,7 @@ def welcome(update, context):
 def kalungas(update, context):
     
     firstName = update.message.from_user.first_name
-    message = 'Olá, ' + firstName + '! Aguarde um instante que estou verificando...'
+    message = 'Olá, ' + firstName + '! Aguarde um instante, estou verificando se existem focos de incêndio na região dos Kalungas...'
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
