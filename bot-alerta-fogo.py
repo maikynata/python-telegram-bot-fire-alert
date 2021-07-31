@@ -213,7 +213,7 @@ def result_focos(update, context):
     #     print(str(e))
 
     estado_resp = update.message.text
-    print(estado_resp)
+    print("Cidade do update.message.text: " + estado_resp)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou a cidade: ' + cidade_resp)
     context.bot.send_message(chat_id=update.effective_chat.id, text='Agora digite o estado: ' + estado_resp)
 
