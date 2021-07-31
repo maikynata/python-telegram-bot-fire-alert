@@ -260,6 +260,32 @@ def ajuda(update, context):
     message = 'Os dados apresentados pelo Labareda Alerta são atualizados a cada 3 horas, nos seguintes horários: 00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 (UTC) Conforme o site http://queimadas.dgi.inpe.br.'
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
+
+def askForNota(update, context):
+    try:
+        question = 'Qual nota você dá para o tutorial?'
+        keyboard = InlineKeyboardMarkup(
+            [[InlineKeyboardButton("👎 1", callback_data='1'),
+              InlineKeyboardButton("2", callback_data='2'),
+              InlineKeyboardButton("🤔 3", callback_data='3'),
+              InlineKeyboardButton("4", callback_data='4'),
+              InlineKeyboardButton("👍 5", callback_data='5')]])
+        update.message.reply_text(question, reply_markup=keyboard)
+    except Exception as e:
+        print(str(e))
+
+
+def getNota(update, context):
+    try:
+        query = update.callback_query
+        print(str(query.data))
+        message = 'Obrigada pela sua nota: ' + str(query.data) 
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    except Exception as e:
+        print(str(e))
+
+
+
 def cancel(update, context):
     return ConversationHandler.END
 
@@ -279,9 +305,11 @@ def main():
             STATE1: [MessageHandler(Filters.text, estado)],
             STATE2: [MessageHandler(Filters.text, result_focos)],
         },
-        fallbacks=[CommandHandler('cancel', cancel)],)
-        
+        fallbacks=[CommandHandler('cancel', cancel)])
     updater.dispatcher.add_handler(conversation_handler)
+
+    updater.dispatcher.add_handler(CommandHandler('nota', askForNota))
+    updater.dispatcher.add_handler(CallbackQueryHandler(getNota))
 
     # updater.dispatcher.add_handler(CallbackQueryHandler(estado))
 
