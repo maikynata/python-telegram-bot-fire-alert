@@ -209,7 +209,22 @@ def estado(update, context):
                 InlineKeyboardButton("MS", callback_data='50'),
                 InlineKeyboardButton("BA", callback_data='29'),
                 InlineKeyboardButton("MA", callback_data='21'),
-                InlineKeyboardButton("DF", callback_data='53')]])
+                InlineKeyboardButton("DF", callback_data='53'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("RO", callback_data='11'),
+                InlineKeyboardButton("AC", callback_data='12'),
+                InlineKeyboardButton("AM", callback_data='13'),
+                InlineKeyboardButton("RR", callback_data='14'),
+                InlineKeyboardButton("PA", callback_data='15'),
+                InlineKeyboardButton("AP", callback_data='16'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("MA", callback_data='21'),
+                InlineKeyboardButton("MA", callback_data='21'),]])
         update.message.reply_text(question, reply_markup=keyboard)
     except Exception as e:
             print(str(e))
