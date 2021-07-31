@@ -196,7 +196,7 @@ def estado(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE1
     else:
-        message = "Muito obrigado! Agora digite o nome por extenso, do estado deste município. Exemplo: Goiás"
+        message = "Muito obrigado! Agora digite o nome por extenso, o nome do estado deste município. Exemplo: Goiás"
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE2
 
@@ -214,7 +214,7 @@ def result_focos(update, context):
 
     estado_resp = update.message.text
     print("Cidade do update.message.text: " + estado_resp)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Agora você digitou o Estado: ' + estado_resp)
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou o Estado: ' + estado_resp)
 
     # 'Ou, acesse o menu com o comando /kalungas para ver os focos da região Kalunga. \n\n'
     # context.bot.send_message(chat_id=update.effective_chat.id, text='Você digitou' + cidade)
