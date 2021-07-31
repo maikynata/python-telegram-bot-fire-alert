@@ -283,7 +283,7 @@ def getNota(update, context):
 
 def ajuda(update, context):
     message = """Os dados apresentados pelo Labareda Alerta são atualizados a cada 3 horas, nos seguintes horários: 
-    \n00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 (UTC) Conforme o site http://queimadas.dgi.inpe.br.\n\n
+    00:00, 03:00, 06:00, 09:00, 12:00, 15:00, 18:00, 21:00 (UTC) Conforme o site http://queimadas.dgi.inpe.br.\n\n
     - Utilize o menu para fazer as consultas:\n
     /iniciar - Para consultar focos de qualquer cidade do Brasil
     /kalungas - Para consultar os focos da região Kalunga"""
@@ -317,7 +317,6 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('nota', askForEstado))
     updater.dispatcher.add_handler(CallbackQueryHandler(getNota))
 
-    # updater.dispatcher.add_handler(CallbackQueryHandler(estado))
 
     updater.start_polling()
     print(str(updater))
