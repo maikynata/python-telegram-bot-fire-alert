@@ -203,33 +203,59 @@ def estado(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         
     try:
-        question = 'Agora clique no Estado desta cidade:'
+
+        message = "Agora escolha o Estado deste Município.\n"
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
+        regiao_centro = 'Região Centro-Oeste:'
         keyboard = InlineKeyboardMarkup(
                 [[InlineKeyboardButton("GO", callback_data='52'),
+                InlineKeyboardButton("MT", callback_data='51'),
                 InlineKeyboardButton("MS", callback_data='50'),
-                InlineKeyboardButton("BA", callback_data='29'),
-                InlineKeyboardButton("MA", callback_data='21'),
-                InlineKeyboardButton("DF", callback_data='53'),
-                InlineKeyboardButton("TO", callback_data='21'),
-                InlineKeyboardButton("RO", callback_data='17'),
-                InlineKeyboardButton("AC", callback_data='12'),]])
-        update.message.reply_text(question, reply_markup=keyboard)
+                InlineKeyboardButton("DF", callback_data='53'),]])
+        update.message.reply_text(regiao_centro, reply_markup=keyboard)
 
         regiao_norte = 'Região Norte:'
         keyboard2 = InlineKeyboardMarkup(
                 [[InlineKeyboardButton("AM", callback_data='13'),
+                InlineKeyboardButton("AC", callback_data='12'),
+                InlineKeyboardButton("AP", callback_data='16'),
                 InlineKeyboardButton("RR", callback_data='14'),
                 InlineKeyboardButton("PA", callback_data='15'),
-                InlineKeyboardButton("AP", callback_data='16'),
+                InlineKeyboardButton("TO", callback_data='17'),
+                InlineKeyboardButton("RO", callback_data='11'),]])
+        update.message.reply_text(regiao_norte, reply_markup=keyboard2)
+
+        regiao_nordeste = 'Região Nordeste:'
+        keyboard3 = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("MA", callback_data='21'),
                 InlineKeyboardButton("PI", callback_data='22'),
                 InlineKeyboardButton("CE", callback_data='23'),
-                InlineKeyboardButton("RN", callback_data='24'),
                 InlineKeyboardButton("PB", callback_data='25'),
-                InlineKeyboardButton("MA", callback_data='21'),
-                InlineKeyboardButton("MA", callback_data='21'),
-                InlineKeyboardButton("MA", callback_data='21'),
-                InlineKeyboardButton("MA", callback_data='21'),]])
-        update.message.reply_text(regiao_norte, reply_markup=keyboard2)
+                InlineKeyboardButton("PE", callback_data='26'),
+                InlineKeyboardButton("AL", callback_data='27'),
+                InlineKeyboardButton("SE", callback_data='28'),
+                InlineKeyboardButton("BA", callback_data='29'),]])
+        update.message.reply_text(regiao_nordeste, reply_markup=keyboard3)
+        keyboard3_1 = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("RN", callback_data='24'),]])
+        update.message.reply_text(reply_markup=keyboard3_1)
+
+        regiao_sudeste = 'Região Suteste:'
+        keyboard4 = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("SP", callback_data='35'),
+                InlineKeyboardButton("ES", callback_data='32'),
+                InlineKeyboardButton("RJ", callback_data='33'),
+                InlineKeyboardButton("MG", callback_data='31'),]])
+        update.message.reply_text(regiao_sudeste, reply_markup=keyboard4)
+
+        regiao_sul= 'Região Sul:'
+        keyboard5 = InlineKeyboardMarkup(
+                [[InlineKeyboardButton("PR", callback_data='41'),
+                InlineKeyboardButton("SC", callback_data='42'),
+                InlineKeyboardButton("RS", callback_data='43'),]])
+        update.message.reply_text(regiao_sul, reply_markup=keyboard5)
+        
     except Exception as e:
             print(str(e))
         
