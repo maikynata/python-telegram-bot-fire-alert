@@ -238,7 +238,7 @@ def estado(update, context):
                 InlineKeyboardButton("BA", callback_data='29'),]])
         update.message.reply_text(regiao_nordeste, reply_markup=keyboard3)
         
-        regiao_nordeste_2 = '.'
+        regiao_nordeste_2 = ''
         keyboard3_1 = InlineKeyboardMarkup(
                 [[InlineKeyboardButton("RN", callback_data='24'),]])
         update.message.reply_text(regiao_nordeste_2, reply_markup=keyboard3_1)
