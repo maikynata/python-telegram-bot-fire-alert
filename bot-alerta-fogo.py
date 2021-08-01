@@ -226,11 +226,6 @@ def estado(update, context):
                 InlineKeyboardButton("RO", callback_data='11'),]])
         update.message.reply_text(regiao_norte, reply_markup=keyboard2)
 
-        regiao_nordeste_2 = '+'
-        keyboard3_1 = InlineKeyboardMarkup(
-                [[InlineKeyboardButton("RN", callback_data='24'),]])
-        update.message.reply_text(regiao_nordeste_2, reply_markup=keyboard3_1)
-
         regiao_nordeste = 'Região Nordeste:'
         keyboard3 = InlineKeyboardMarkup(
                 [[InlineKeyboardButton("MA", callback_data='21'),
@@ -240,14 +235,14 @@ def estado(update, context):
                 InlineKeyboardButton("PE", callback_data='26'),
                 InlineKeyboardButton("AL", callback_data='27'),
                 InlineKeyboardButton("SE", callback_data='28'),
-                InlineKeyboardButton("BA", callback_data='29'),
-                InlineKeyboardButton("RN", callback_data='24'),]])
-        update.message.reply_text(regiao_nordeste, reply_markup=keyboard3+keyboard3_1)
-        
-        regiao_nordeste_2 = '+'
-        keyboard3_1 = InlineKeyboardMarkup(
+                InlineKeyboardButton("BA", callback_data='29'),]],
                 [[InlineKeyboardButton("RN", callback_data='24'),]])
-        update.message.reply_text(regiao_nordeste_2, reply_markup=keyboard3_1)
+        update.message.reply_text(regiao_nordeste, reply_markup=keyboard3)
+        
+        # regiao_nordeste_2 = '+'
+        # keyboard3_1 = InlineKeyboardMarkup(
+        #         [[InlineKeyboardButton("RN", callback_data='24'),]])
+        # update.message.reply_text(regiao_nordeste_2, reply_markup=keyboard3_1)
 
         regiao_sudeste = 'Região Suteste:'
         keyboard4 = InlineKeyboardMarkup(
