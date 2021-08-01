@@ -232,11 +232,11 @@ def estado(update, context):
                 InlineKeyboardButton("PI", callback_data='22'),
                 InlineKeyboardButton("CE", callback_data='23'),
                 InlineKeyboardButton("PB", callback_data='25'),
-                InlineKeyboardButton("PE", callback_data='26'),
-                InlineKeyboardButton("AL", callback_data='27'),
-                InlineKeyboardButton("SE", callback_data='28'),
-                InlineKeyboardButton("BA", callback_data='29'),],
-                [InlineKeyboardButton("RN", callback_data='24')]])
+                InlineKeyboardButton("PE", callback_data='26'),],
+                    [InlineKeyboardButton("AL", callback_data='27'),
+                    InlineKeyboardButton("SE", callback_data='28'),
+                    InlineKeyboardButton("BA", callback_data='29'),
+                    InlineKeyboardButton("RN", callback_data='24')]])
         update.message.reply_text(regiao_nordeste, reply_markup=keyboard3)
         
         # regiao_nordeste_2 = '+'
