@@ -30,7 +30,7 @@ def localFoco(cidade, coord):
     if respCoordinates.status_code != 200:
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
-        # message = str()
+        message = str()
         messageList = [] 
         for todo_item in respCoordinates.json():
             message += '{}\nCoordenadas = {}, {}\n'.format(todo_item['properties']['municipio'],
@@ -320,7 +320,7 @@ def result_focos(update, context):
             
         else:
             message = 'Não há focos de incêndio registrados na região deste Município.'
-            #print(message)
+            print(message)
 
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
             context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
