@@ -48,7 +48,7 @@ def localFoco(cidade, coord):
                 message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'O'
             
             message += '\n\n'
-    return message    
+            return message    
 
 def linkAllFocos(cidade, coord):
     coord += '&municipio_id={}'.format(cidade)
