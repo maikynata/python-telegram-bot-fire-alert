@@ -324,6 +324,7 @@ def result_focos(update, context):
         - Palmeiras de Goiás
         Favor não escrever em letras maiúsculas. Favor verificar se a cidade pertence ao estado selecionado.
         Utilize o menu /iniciar para consultar novamente. Obrigado!"""
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return ConversationHandler.END
 
 
