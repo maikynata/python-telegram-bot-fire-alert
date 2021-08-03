@@ -146,7 +146,7 @@ def kalungas(update, context):
             message += localFoco(id, coordinatesURL)
             # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
-        message = 'Pronto, não há focos de incêndio registrados na região dos Kalungas nas últimas horas de hoje.'
+        message = 'Pronto, não há focos de incêndio registrados na região dos Kalungas nas últimas horas de hoje. Consulte novamente mais tarde'
         # message_linkall = linkAllFocos(id, coordinatesURL)
         # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
 
