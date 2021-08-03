@@ -313,15 +313,17 @@ def result_focos(update, context):
             for foco in messageList:
                 messageFocoItem = foco
                 context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
+                print(messageFocoItem)
+
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+            context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
             
         else:
             message = 'Não há focos de incêndio registrados na região deste Município.'
+            print(message)
+            
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
-        
-        print(message)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
         
         return ConversationHandler.END
 
