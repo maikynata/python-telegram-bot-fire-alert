@@ -30,7 +30,8 @@ def localFoco(cidade, coord):
     if respCoordinates.status_code != 200:
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
-        message = str() 
+        # message = str()
+        messageList = [] 
         for todo_item in respCoordinates.json():
             message += '{}\nCoordenadas = {}, {}\n'.format(todo_item['properties']['municipio'],
                                                            todo_item['properties']['latitude'],
@@ -46,9 +47,11 @@ def localFoco(cidade, coord):
                 message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'W'
             else:
                 message += transformaDecimalGrau(todo_item['properties']['longitude']) + 'O'
-            
             message += '\n\n'
-    return message    
+
+            messageList.append(message)
+
+    return messageList    
 
 def linkAllFocos(cidade, coord):
     coord += '&municipio_id={}'.format(cidade)
@@ -303,9 +306,15 @@ def result_focos(update, context):
         focos += contaFoco(cod_muni, countURL)
             
         if focos > 0:
-            message = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
-            message += localFoco(cod_muni, coordinatesURL)
+            messageCount = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=messageCount)
+            messageList = localFoco(cod_muni, coordinatesURL)
+            
+            for foco in messageList:
+                messageFocoItem = foco
+                context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+            
         else:
             message = 'Não há focos de incêndio registrados na região deste Município.'
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
