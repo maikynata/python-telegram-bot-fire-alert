@@ -318,12 +318,12 @@ def result_focos(update, context):
 
     except Exception as e: 
         print(str(e))
-        message = """O nome do município não foi encontrado, por favor, verifique se o mesmo está escrito corretamente, exemplo:.
+        message = """O nome do município não foi encontrado, por favor, verifique se o mesmo está escrito corretamente, exemplo:
         - Cavalcante
         - Uruçuí
         - Palmeiras de Goiás
-        Favor não escrever em letras maiúsculas. Favor verificar se a cidade pertence ao estado selecionado.
-        Utilize o menu /iniciar para consultar novamente. Obrigado!"""
+    Favor não escrever em letras maiúsculas. Favor verificar se a cidade pertence ao Estado selecionado.
+    Utilize o menu /iniciar para consultar novamente. Obrigado!"""
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return ConversationHandler.END
 
