@@ -33,7 +33,7 @@ def localFoco(cidade, coord):
         message = str()
         messageList = [] 
         for todo_item in respCoordinates.json():
-            message = '{}\nCoordenadas = {}, {}\n {}\n'.format(todo_item['properties']['municipio'],
+            message = '{}\nCoordenadas = {}, {}\nSatélite:{}\n'.format(todo_item['properties']['municipio'],
                                                            todo_item['properties']['latitude'],
                                                            todo_item['properties']['longitude'],
                                                            todo_item['properties']['satelite'])
