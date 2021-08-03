@@ -267,53 +267,64 @@ def estado(update, context):
 
 def result_focos(update, context):
 
-    cidade_resp = context.user_data["city"]
-    print("Cidade do context.user_data: " + cidade_resp)
-
     try:
-        query = update.callback_query
-        print(str(query.data))
-        # message = 'Você escolheu o Estado: ' + str(query.data) 
-        # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        cidade_resp = context.user_data["city"]
+        print("Cidade do context.user_data: " + cidade_resp)
+
+        try:
+            query = update.callback_query
+            print(str(query.data))
+            # message = 'Você escolheu o Estado: ' + str(query.data) 
+            # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        except Exception as e: 
+            print(str(e))
+            return ConversationHandler.END
+        
+        cod_estado = str(query.data)
+        estado_nome = read_csv_estado(cod_estado)
+
+        print("Estado selecionado no menu query.data: " + cod_estado)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Você escolheu no menu o Estado: ' + estado_nome)
+        
+        cod_muni = read_csv_cidade(cidade_resp,estado_nome)
+        
+        context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
+
+        baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
+        pais_id = int(33)
+        estado_id = int(cod_estado)
+        municipio = int(cod_muni)
+
+        coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
+        countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
+
+        focos = 0
+        focos += contaFoco(cod_muni, countURL)
+            
+        if focos > 0:
+            message = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
+            message += localFoco(cod_muni, coordinatesURL)
+            endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+        else:
+            message = 'Não há focos de incêndio registrados na região deste Município.'
+            endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+        
+        print(message)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+        
+        return ConversationHandler.END
+
     except Exception as e: 
         print(str(e))
+        message = """O nome do município não foi encontrado, por favor, verifique se o mesmo está escrito corretamente, exemplo:.
+        - Cavalcante
+        - Uruçuí
+        - Palmeiras de Goiás
+        Favor não escrever em letras maiúsculas. Favor verificar se a cidade pertence ao estado selecionado.
+        Utilize o menu /iniciar para consultar novamente. Obrigado!"""
         return ConversationHandler.END
-    
-    cod_estado = str(query.data)
-    estado_nome = read_csv_estado(cod_estado)
-
-    print("Estado selecionado no menu query.data: " + cod_estado)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Você escolheu no menu o Estado: ' + estado_nome)
-    
-    cod_muni = read_csv_cidade(cidade_resp,estado_nome)
-    
-    context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
-
-    baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
-    pais_id = int(33)
-    estado_id = int(cod_estado)
-    municipio = int(cod_muni)
-
-    coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
-    countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
-
-    focos = 0
-    focos += contaFoco(cod_muni, countURL)
-        
-    if focos > 0:
-        message = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
-        message += localFoco(cod_muni, coordinatesURL)
-        endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
-    else:
-        message = 'Não há focos de incêndio registrados na região deste Município.'
-        endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
-    
-    print(message)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
-    
-    return ConversationHandler.END
 
 
 def ajuda(update, context):
