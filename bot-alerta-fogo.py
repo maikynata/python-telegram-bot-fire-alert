@@ -310,8 +310,8 @@ def result_focos(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text=messageCount)
             messageList = localFoco(cod_muni, coordinatesURL)
             
-            for foco in range(len(messageList)):
-                messageFocoItem = messageList[foco]
+            for foco in messageList:
+                messageFocoItem = foco
                 context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
                 print(messageFocoItem)
 
