@@ -1,5 +1,10 @@
-iniciar - Usar o bot e boas vindas
-cidade_f - Relatório dos focos por município. Digite o código do município.
-kalungas - Relatório dos focos de incêndio registrados pelo satélite na região dos kalungas
-ajuda - Mostra em quais horários o Labareda recebe novas informações
+iniciar - Consultar focos de calor de qualquer Município do Brasil
+kalungas - Consultar focos de calor na região Kalunga
+ajuda - Ajuda com dúvidas
 cancel - Encerrar a conversa
+
+------ Texto base do bot (O que esse bot pode fazer?):
+Olá, eu sou o Labareda Alerta!
+Posso consultar para você todos os focos de calor de qualquer Município do Brasil, use o menu /iniciar.
+Consulte também se existem focos na região Kalunga, use o menu /kalungas.
+Qualquer dúvida use o menu /ajuda.

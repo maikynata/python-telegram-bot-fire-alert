@@ -33,7 +33,7 @@ def localFoco(cidade, coord):
         message = str()
         messageList = [] 
         for todo_item in respCoordinates.json():
-            message = '{}\nCoordenadas = {}, {}\nSatélite:{}\n'.format(todo_item['properties']['municipio'],
+            message = '{}\nCoordenadas = {}, {}\nSatélite: {}\n'.format(todo_item['properties']['municipio'],
                                                            todo_item['properties']['latitude'],
                                                            todo_item['properties']['longitude'],
                                                            todo_item['properties']['satelite'])
@@ -109,7 +109,7 @@ def welcome(update, context):
         message = 'Olá, ' + firstName + '!'
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
-        message = 'Digite o nome do município que você deseja ver a localização dos focos de incêndio, Exemplo: Cavalcante.\n\n'
+        message = 'Digite o nome do município que você deseja ver a localização dos focos de calor, Exemplo: Cavalcante.\n\n'
         update.message.reply_text(message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
         return STATE1
     except Exception as e:
@@ -125,7 +125,7 @@ def welcome(update, context):
 def kalungas(update, context):
     
     firstName = update.message.from_user.first_name
-    message = 'Olá, ' + firstName + '! Aguarde um instante, estou verificando se existem focos de incêndio na região dos Kalungas...'
+    message = 'Olá, ' + firstName + '! Aguarde um instante, estou verificando se existem focos de calor na região dos Kalungas...'
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
