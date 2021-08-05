@@ -153,6 +153,8 @@ def kalungas(update, context):
     # print(message)
     # print(message_linkall)
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+    context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
     # context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
     return ConversationHandler.END
 
