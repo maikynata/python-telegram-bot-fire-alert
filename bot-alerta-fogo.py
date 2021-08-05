@@ -322,6 +322,7 @@ def result_focos(update, context):
         else:
             message = 'Não há focos de incêndio registrados na região deste Município.'
             print(message)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
             context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
