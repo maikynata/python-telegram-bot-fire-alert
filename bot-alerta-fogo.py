@@ -293,7 +293,7 @@ def result_focos(update, context):
         cod_muni = read_csv_cidade(cidade_resp,estado_nome)
         
         context.bot.send_message(chat_id=update.effective_chat.id, text='O código do IBGE deste município é: ' + cod_muni)
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de incêndio na região de ' + cidade_resp + '...')
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Muito obrigado! Já estou verificando se existem focos de calor na região de ' + cidade_resp + '...')
 
         baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
         pais_id = int(33)
