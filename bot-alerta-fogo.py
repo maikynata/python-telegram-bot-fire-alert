@@ -141,12 +141,12 @@ def kalungas(update, context):
         focos += contaFoco(id, countURL)
         
     if focos > 0:
-        message = 'O número de supostos focos de incêndio na região dos Kalungas é de {}\n'.format(focos)
+        message = 'O número de supostos focos de calor na região dos Kalungas é de {}\n'.format(focos)
         for id in municipios:
             message += localFoco(id, coordinatesURL)
             # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
     else:
-        message = 'Pronto, não há focos de incêndio registrados na região dos Kalungas nas últimas horas de hoje. Consulte novamente mais tarde'
+        message = 'Pronto, não há focos de calor registrados na região dos Kalungas nas últimas horas de hoje. Consulte novamente mais tarde'
         # message_linkall = linkAllFocos(id, coordinatesURL)
         # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
 
@@ -320,7 +320,7 @@ def result_focos(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
             
         else:
-            message = 'Não há focos de incêndio registrados na região deste Município.'
+            message = 'Não há focos de calor registrados na região deste Município.'
             print(message)
             context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
