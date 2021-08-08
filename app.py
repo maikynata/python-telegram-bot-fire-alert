@@ -1,8 +1,6 @@
 from flask import Flask, render_template
 
-app = Flask(__name__, static_url_path='', 
-            static_folder='templates/maps',
-            template_folder='templates')
+app = Flask(__name__, static_folder='templates')
 
 @app.route("/")
 def index():
@@ -21,7 +19,7 @@ def index():
     f.close()
 
     # Render HTML with count variable
-    return render_template("index.html", count=count)
+    return app.send_static_file("index.html")
 
 if __name__ == "__main__":
     app.run()
