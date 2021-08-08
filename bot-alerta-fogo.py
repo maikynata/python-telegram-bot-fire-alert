@@ -67,13 +67,13 @@ def linkAllFocos(cidade, coord):
             linkAll += '/{},{}'.format(todo_item['properties']['latitude'],
                                     todo_item['properties']['longitude'])
             
-            if todo_item == range(len(respCoordinates.json())-1):
+            if (respCoordinates.json()[-1]):
                 linkAll += '//@{},{}'.format(todo_item['properties']['latitude'],
                                     todo_item['properties']['longitude'])
 
         linkAll += ',11z\n\n'
-        print(range(len(respCoordinates.json())-1))
-        print(str(respCoordinates.json()[0]))
+        
+        print(respCoordinates.json()[-1])
 
     return linkAll    
 
@@ -136,7 +136,7 @@ def kalungas(update, context):
     baseURL = 'http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api'
     pais_id = int(33)
     estado_id = int(52)
-    municipios = [5205307, 5221080, 5213509, 5203401]
+    municipios = [5205307, 5221080, 5213509]
 
     coordinatesURL = baseURL + '/focos/?pais_id={}&estado_id={}'.format(pais_id, estado_id)
     countURL = baseURL + '/focos/count?pais_id={}&estado_id={}'.format(pais_id, estado_id)
