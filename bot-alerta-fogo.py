@@ -73,7 +73,7 @@ def linkAllFocos(cidade, coord):
 
         linkAll += ',11z\n\n'
         
-        print(respCoordinates.json()[-1])
+        # print(respCoordinates.json()[-1])
 
     return linkAll    
 
