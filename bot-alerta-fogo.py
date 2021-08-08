@@ -142,21 +142,26 @@ def kalungas(update, context):
         
     if focos > 0:
         message = 'O número de supostos focos de calor na região dos Kalungas é de {}\n'.format(focos)
-        for id in municipios:
-            message += localFoco(id, coordinatesURL)
-            # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
-    else:
-        message = 'Pronto, não há focos de calor registrados na região dos Kalungas nas últimas horas de hoje. Consulte novamente mais tarde'
-        # message_linkall = linkAllFocos(id, coordinatesURL)
-        # message_linkall = 'Acesse para ver todos os pontos no mapa: https://bot-alerta-fogo.herokuapp.com/'
+        messageList = localFoco(id, coordinatesURL)
+            
+        for foco in messageList:
+            messageFocoItem = foco
+            context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
+            print(messageFocoItem)
 
-    # print(message)
-    # print(message_linkall)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-    endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
-    context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
-    # context.bot.send_message(chat_id=update.effective_chat.id, text=message_linkall)
-    return ConversationHandler.END
+            endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+            context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+            
+        else:
+            message = 'Não há focos de calor registrados na região Kalunga.'
+            print(message)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
+            endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+            context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+        
+        return ConversationHandler.END
+
 
 def read_csv_cidade(cidade,estado):
 
