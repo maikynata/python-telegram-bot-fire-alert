@@ -286,7 +286,7 @@ def result_focos(update, context):
 
         try:
             query = update.callback_query
-            # print(str(query.data))
+            print(str(query.data))
             # message = 'Você escolheu o Estado: ' + str(query.data) 
             # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         except Exception as e: 
@@ -348,7 +348,8 @@ def result_focos(update, context):
     Favor não escrever em letras maiúsculas. Favor verificar se a cidade pertence ao Estado selecionado.
     Utilize o menu /iniciar para consultar novamente. Obrigado!"""
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-        return ConversationHandler.END
+    
+    return ConversationHandler.END
 
 
 def ajuda(update, context):
