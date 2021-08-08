@@ -142,6 +142,7 @@ def kalungas(update, context):
         
     if focos > 0:
         message = 'O número de supostos focos de calor na região dos Kalungas é de {}\n'.format(focos)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         messageList = localFoco(id, coordinatesURL)
             
         for foco in messageList:
@@ -149,18 +150,19 @@ def kalungas(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
             print(messageFocoItem)
 
-            endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
-            context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
-            
-        else:
-            message = 'Não há focos de calor registrados na região Kalunga.'
-            print(message)
-            context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-
-            endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
-            context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
-        
+        endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+        context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
         return ConversationHandler.END
+            
+    else:
+        message = 'Não há focos de calor registrados na região Kalunga.'
+        print(message)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
+        endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+        context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+        
+    return ConversationHandler.END
 
 
 def read_csv_cidade(cidade,estado):
@@ -325,6 +327,7 @@ def result_focos(update, context):
 
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
             context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+            return ConversationHandler.END
             
         else:
             message = 'Não há focos de calor registrados na região deste Município.'
