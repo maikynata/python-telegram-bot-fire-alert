@@ -286,7 +286,7 @@ def result_focos(update, context):
 
         try:
             query = update.callback_query
-            print(str(query.data))
+            # print(str(query.data))
             # message = 'Você escolheu o Estado: ' + str(query.data) 
             # context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         except Exception as e: 
