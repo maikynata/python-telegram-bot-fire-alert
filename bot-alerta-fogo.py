@@ -62,9 +62,10 @@ def linkAllFocos(cidade, coord):
     else:
         linkAll = 'https://www.google.com/maps/dir' 
         for todo_item in respCoordinates.json():
-            linkAll += '//{}'.format(todo_item['properties']['latitude'],
+            linkAll += '//{},{}'.format(todo_item['properties']['latitude'],
                                     todo_item['properties']['longitude'])
-            linkAll += '//\n\n'
+        
+        linkAll += '//\n\n'
 
     return linkAll    
 
@@ -325,7 +326,7 @@ def result_focos(update, context):
 
             linkAll = linkAllFocos(cod_muni, coordinatesURL)
             context.bot.send_message(chat_id=update.effective_chat.id, text=linkAll)
-            
+
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
             print(endmessage)
             context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
