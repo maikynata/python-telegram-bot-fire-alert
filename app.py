@@ -1,6 +1,7 @@
 from flask import Flask, render_template
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=os.path.abspath("../build"), static_url_path='/')
 
 @app.route("/")
 def index():
