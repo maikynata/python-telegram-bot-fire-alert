@@ -1,52 +1,36 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Labareda Alerta - Todos os Focos Encontrados</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>Google Maps Multiple Markers</title>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxfe_cHNtLA90xWyHykDj0HZKLpVqYLpI&callback=initMap"
-  type="text/javascript"></script>
-</head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha384-VzLXTJGPSyTLX6d96AxgkKvE/LRb7ECGyTxuwtpjHnVWVZs2gp5RDjeM/tgBnVdM"
+      crossorigin="anonymous"
+    />
 
-<body>
+   <script
+      src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"
+      integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha384-RFZC58YeKApoNsIbBxf4z6JJXmh+geBSgkCQXFyh+4tiFSJmJBt+2FbjxW7Ar16M"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<div id="map" style="width: 500px; height: 400px;"></div>
+  <body>
+    <h1>Labareda Alerta</h1>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxfe_cHNtLA90xWyHykDj0HZKLpVqYLpI&callback=initMap"
-type="text/javascript">
-    var locations = [
-      ['Bondi Beach', -13.69322, -47.82922, 4],
-      ['Coogee Beach', -13.69653, -47.82976, 5],
-      ['Cronulla Beach', -13.42668, -47.83013, 3],
-      ['Manly Beach', -13.83, -47.33931, 2],
-      ['Maroubra Beach', -13.4249, -47.82881, 1]
-    ];
+    <p>Veja todos os focos de calor encontrados
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 8,
-      center: new google.maps.LatLng(-13.6324788, -47.7458934),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-
-    var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
-
-    for (i = 0; i < locations.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map
-      });
-
-      google.maps.event.addListener(marker, 'click', (function (marker, i) {
-        return function () {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
-
-  </script>
-</body>
-
+    <div id="map" style="width: 800px; height: 440px; border: 1px solid #AAA;"></div>
+    
+    <script type='text/javascript' src='maps/markers.js'></script>
+    <script type='text/javascript' src='maps/leaf-demo.js'></script>
+  </body>
 </html>
