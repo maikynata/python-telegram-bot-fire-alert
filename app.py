@@ -1,7 +1,8 @@
 from flask import Flask, render_template
-import os
 
-app = Flask(__name__, static_folder=os.path.abspath("../build"), static_url_path='/')
+app = Flask(__name__, static_url_path='', 
+            static_folder='templates/maps',
+            template_folder='templates')
 
 @app.route("/")
 def index():
