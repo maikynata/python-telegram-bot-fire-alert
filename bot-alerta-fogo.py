@@ -67,11 +67,13 @@ def linkAllFocos(cidade, coord):
             linkAll += '/{},{}'.format(todo_item['properties']['latitude'],
                                     todo_item['properties']['longitude'])
             
-            if todo_item == (len(respCoordinates.json())-1):
+            if todo_item == range(len(respCoordinates.json())-1):
                 linkAll += '//@{},{}'.format(todo_item['properties']['latitude'],
                                     todo_item['properties']['longitude'])
 
         linkAll += ',11z\n\n'
+        print(range(len(respCoordinates.json())-1))
+        print(str(respCoordinates.json()[0]))
 
     return linkAll    
 
