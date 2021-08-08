@@ -55,17 +55,23 @@ def localFoco(cidade, coord):
     return messageList    
 
 def linkAllFocos(cidade, coord):
+    
     coord += '&municipio_id={}'.format(cidade)
     respCoordinates = requests.get(coord)
+
     if respCoordinates.status_code != 200:
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
         linkAll = 'https://www.google.com/maps/dir' 
         for todo_item in respCoordinates.json():
-            linkAll += '//{},{}'.format(todo_item['properties']['latitude'],
+            linkAll += '/{},{}'.format(todo_item['properties']['latitude'],
                                     todo_item['properties']['longitude'])
-        
-        linkAll += '//\n\n'
+            
+            if todo_item == (len(respCoordinates.json())-1):
+                linkAll += '//@{},{}'.format(todo_item['properties']['latitude'],
+                                    todo_item['properties']['longitude'])
+
+        linkAll += ',11z\n\n'
 
     return linkAll    
 
@@ -325,7 +331,7 @@ def result_focos(update, context):
                 print(messageFocoItem)
 
             linkAll = linkAllFocos(cod_muni, coordinatesURL)
-            context.bot.send_message(chat_id=update.effective_chat.id, text=linkAll)
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Logo abaixo segue link com todos os focos de calor: \n'+linkAll)
 
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
             print(endmessage)
