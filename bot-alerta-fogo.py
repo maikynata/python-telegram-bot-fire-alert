@@ -328,12 +328,12 @@ def result_focos(update, context):
         if focos > 0:
             messageCount = 'O número de supostos focos de incêndio na região deste Município código: '+ cod_muni +' é de {}\n\n'.format(focos)
             context.bot.send_message(chat_id=update.effective_chat.id, text=messageCount)
-            # messageList = localFoco(cod_muni, coordinatesURL)
+            messageList = localFoco(cod_muni, coordinatesURL)
             
-            # for foco in messageList:
-            #     messageFocoItem = foco
-            #     context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
-            #     print(messageFocoItem)
+            for foco in messageList:
+                messageFocoItem = foco
+                context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
+                print(messageFocoItem)
 
             linkAll = linkAllFocos(cod_muni, coordinatesURL)
             context.bot.send_message(chat_id=update.effective_chat.id, text='Logo abaixo segue link com todos os focos de calor: \n'+linkAll)
