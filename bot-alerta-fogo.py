@@ -154,6 +154,9 @@ def kalungas(update, context):
             messageFocoItem = foco
             context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
             print(messageFocoItem)
+        
+        linkAll = linkAllFocos(id, coordinatesURL)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Logo abaixo, segue link com todos os focos de calor: \n'+linkAll)
 
         endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
         print(endmessage)
