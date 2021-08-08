@@ -60,17 +60,13 @@ def linkAllFocos(cidade, coord):
     if respCoordinates.status_code != 200:
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
-        location = str() 
+        linkAll = 'https://www.google.com/maps/dir' 
         for todo_item in respCoordinates.json():
-            # location = (todo_item['properties']['latitude'],todo_item['properties']['longitude'])
-            location += '{}\nCoordenadas = {}, {}\n'.format(todo_item['properties']['municipio'])
+            linkAll += '//{}'.format(todo_item['properties']['latitude'],
+                                    todo_item['properties']['longitude'])
+            linkAll += '//\n\n'
 
-            
-            location += 'https://www.google.com/maps/dir//'
-            
-            
-            location += '\n\n TesteLinkAll'
-    return location    
+    return linkAll    
 
 
 def transformaDecimalGrau(grau):
@@ -327,6 +323,9 @@ def result_focos(update, context):
                 context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
                 print(messageFocoItem)
 
+            linkAll = linkAllFocos(cod_muni, coordinatesURL)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=linkAll)
+            
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
             print(endmessage)
             context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
