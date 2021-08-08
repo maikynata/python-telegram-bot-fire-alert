@@ -151,6 +151,7 @@ def kalungas(update, context):
             print(messageFocoItem)
 
         endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+        print(endmessage)
         context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
         return ConversationHandler.END
             
@@ -160,6 +161,7 @@ def kalungas(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
         endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+        print(endmessage)
         context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
         
     return ConversationHandler.END
@@ -326,6 +328,7 @@ def result_focos(update, context):
                 print(messageFocoItem)
 
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+            print(endmessage)
             context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
             return ConversationHandler.END
             
