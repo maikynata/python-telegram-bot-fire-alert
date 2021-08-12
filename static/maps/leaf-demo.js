@@ -1,7 +1,7 @@
 // Credits, see post: https://asmaloney.com/2014/01/code/creating-an-interactive-map-with-leaflet-and-openstreetmap/
 
 var map = L.map('map', {
-  center: [-16.0, -52.0],
+  center: [-16.0, -56.0],
   minZoom: 2,
   zoom: 4,
 })
