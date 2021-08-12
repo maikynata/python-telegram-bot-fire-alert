@@ -149,9 +149,9 @@ def kalungas(update, context):
         if focos > 0:
             message = 'O número de supostos focos de calor na região dos Kalungas é de {}\n'.format(focos)
             context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-            messageList = localFoco(id, coordinatesURL)
 
-            for id in municipios:    
+            for id in municipios:
+                messageList = localFoco(id, coordinatesURL)    
                 for foco in messageList:
                     messageFocoItem = foco
                     context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
