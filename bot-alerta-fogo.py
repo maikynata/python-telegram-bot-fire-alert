@@ -158,7 +158,9 @@ def kalungas(update, context):
                     print(messageFocoItem)
             
                 linkAll = linkAllFocos(id, coordinatesURL)
-                if linkAll != 'https://www.google.com/maps/dir,11z':
+                if linkAll == 'https://www.google.com/maps/dir,11z':
+                    context.bot.send_message(chat_id=update.effective_chat.id, text='Pronto!: \n'+linkAll)
+                else:
                     context.bot.send_message(chat_id=update.effective_chat.id, text='Logo abaixo, segue link com todos os focos de calor: \n'+linkAll)
 
             endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
