@@ -146,34 +146,34 @@ def kalungas(update, context):
         for id in municipios:
             focos += contaFoco(id, countURL)
             
-            if focos > 0:
-                message = 'O número de supostos focos de calor na região dos Kalungas é de {}\n'.format(focos)
-                context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-                messageList = localFoco(id, coordinatesURL)
-                    
+        if focos > 0:
+            message = 'O número de supostos focos de calor na região dos Kalungas é de {}\n'.format(focos)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+            messageList = localFoco(id, coordinatesURL)
+
+            for id in municipios:    
                 for foco in messageList:
                     messageFocoItem = foco
                     context.bot.send_message(chat_id=update.effective_chat.id, text=messageFocoItem)
                     print(messageFocoItem)
-                
-                linkAll = linkAllFocos(id, coordinatesURL)
-                context.bot.send_message(chat_id=update.effective_chat.id, text='Logo abaixo, segue link com todos os focos de calor: \n'+linkAll)
-                
-            else:
-                message = 'Não há focos de calor registrados na região Kalunga.'
-                print(message)
-                context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-
-                endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
-                print(endmessage)
-                context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
-                return ConversationHandler.END
-
-        endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
-        print(endmessage)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
-        return ConversationHandler.END    
             
+            linkAll = linkAllFocos(id, coordinatesURL)
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Logo abaixo, segue link com todos os focos de calor: \n'+linkAll)
+
+            endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+            print(endmessage)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+            return ConversationHandler.END
+            
+        else:
+            message = 'Não há focos de calor registrados na região Kalunga.'
+            print(message)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
+            endmessage = 'Consulta finalizada, utilize o menu para fazer uma nova consulta.'
+            print(endmessage)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=endmessage)
+            return ConversationHandler.END
 
     except Exception as e: 
         print(str(e))        
