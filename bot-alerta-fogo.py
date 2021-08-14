@@ -25,6 +25,7 @@ def contaFoco(cidade, count):
     
     return focos 
 
+
 def localFoco(cidade, coord):
     coord += '&municipio_id={}'.format(cidade)
     respCoordinates = requests.get(coord)
@@ -34,7 +35,6 @@ def localFoco(cidade, coord):
 
         # Save a json file with all points of the response
         data_points = respCoordinates.json()
-        data_points += 'var geojsonFeature ='
         with open('static/maps/data.js', 'w') as json_focos_file:
             json.dump(data_points, json_focos_file)
         print(data_points)
@@ -47,6 +47,7 @@ def localFoco(cidade, coord):
             f.seek(0, 0)
             f.write(line.rstrip('\r\n') + '\n' + content)
             print(content)
+            print('data_poins data.js editado!')
 
         message = str()
         messageList = [] 
@@ -71,6 +72,7 @@ def localFoco(cidade, coord):
             messageList.append(message)
 
     return messageList    
+
 
 def linkAllFocos(cidade, coord):
     
@@ -214,6 +216,7 @@ def read_csv_cidade(cidade,estado):
                 cod_muni = row[2]
                 return cod_muni
             line_count += 1
+
 
 def read_csv_estado(estado):
 
@@ -401,6 +404,7 @@ def ajuda(update, context):
 
 def cancel(update, context):
     return ConversationHandler.END
+
 
 def main():
     token = os.environ['TOKEN']
