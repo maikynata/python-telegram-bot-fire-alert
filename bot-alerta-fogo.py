@@ -33,10 +33,10 @@ def localFoco(cidade, coord):
     else:
 
         data_points = respCoordinates.json()
-        with open('data.js', 'w') as json_focos_file:
+        with open('static/maps/data.js', 'w') as json_focos_file:
             json.dump(data_points, json_focos_file)
         print(data_points)
-        print('json salvo!')
+        print('data_poins data.js file salvo!')
 
         message = str()
         messageList = [] 
