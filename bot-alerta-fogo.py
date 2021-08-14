@@ -46,6 +46,7 @@ def localFoco(cidade, coord):
             content = f.read()
             f.seek(0, 0)
             f.write(line.rstrip('\r\n') + '\n' + content)
+            print(content)
 
         message = str()
         messageList = [] 
