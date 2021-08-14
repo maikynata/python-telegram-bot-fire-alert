@@ -32,10 +32,11 @@ def localFoco(cidade, coord):
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
 
-        data = respCoordinates.json()
+        data_points = respCoordinates.json()
         with open('data.js', 'w') as json_focos_file:
-            json.dump(data, json_focos_file)
-
+            json.dump(data_points, json_focos_file)
+        print(data_points)
+        print('json salvo!')
 
         message = str()
         messageList = [] 
