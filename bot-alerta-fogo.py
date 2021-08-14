@@ -32,7 +32,7 @@ def localFoco(cidade, coord):
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
 
-        data_points = respCoordinates.json()
+        data_points = 'var geojsonFeature =' + respCoordinates.json()
         with open('static/maps/data.js', 'w') as json_focos_file:
             json.dump(data_points, json_focos_file)
         print(data_points)
