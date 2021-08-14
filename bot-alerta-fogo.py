@@ -52,7 +52,8 @@ def localFoco(cidade, coord):
         data_points = respCoordinates.json()
         with open('static/maps/data.js', 'w') as json_focos_file:
             json.dump(data_points, json_focos_file)
-        print(data_points)
+        content = json_focos_file.read()
+        print(content + ' ++ test print content')
         print('data_poins data.js file salvo!')
 
         # Edit the json file to add the var geojsonFeature'
