@@ -32,16 +32,20 @@ def localFoco(cidade, coord):
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
 
+        # Save a json file with all points of the response
         data_points = respCoordinates.json()
+        data_points += 'var geojsonFeature ='
         with open('static/maps/data.js', 'w') as json_focos_file:
             json.dump(data_points, json_focos_file)
         print(data_points)
         print('data_poins data.js file salvo!')
-        
-        var = 'var geojsonFeature ='
-        f = open("static/maps/data.js", "w")
-        f.write(str(var))
-        f.close()
+
+        # Edit the json file to add the var geojsonFeature'
+        line = 'var geojsonFeature ='
+        with open('static/maps/data.js', 'r+') as f:
+            content = f.read()
+            f.seek(0, 0)
+            f.write(line.rstrip('\r\n') + '\n' + content)
 
         message = str()
         messageList = [] 
