@@ -1,4 +1,5 @@
 import os
+from types import TracebackType
 import requests
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, CallbackQueryHandler
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
@@ -25,14 +26,19 @@ def contaFoco(cidade, count):
     
     return focos 
 
+
 def line_prepender(filename, line):
-    with open(filename, 'r+') as f:
-        content = f.read()
-        f.seek(0, 0)
-        f.write(line.rstrip('\r\n') + '\n' + content)
-        new_content = f.read()
-        print(new_content)
-        print('data.js editado!')
+
+    try:
+        with open(filename, 'r+') as f:
+            content = f.read()
+            f.seek(0, 0)
+            f.write(line.rstrip('\r\n') + '\n' + content)
+            new_content = f.read()
+            print(new_content)
+            print('data.js editado!')
+    except Exception as e:
+            print(str(e))
 
 
 def localFoco(cidade, coord):
