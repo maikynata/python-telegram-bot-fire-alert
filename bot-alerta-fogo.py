@@ -4,6 +4,7 @@ from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHa
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from decimal import Decimal
 import csv
+import json
 
 STATE1 = 1
 STATE2 = 2
@@ -30,6 +31,12 @@ def localFoco(cidade, coord):
     if respCoordinates.status_code != 200:
         raise requests.exceptions.RequestException('GET /focos/ {}'.format(respCoordinates.status_code))
     else:
+
+        data = respCoordinates.json()
+        with open('data.js', 'w') as json_focos_file:
+            json.dump(data, json_focos_file)
+
+
         message = str()
         messageList = [] 
         for todo_item in respCoordinates.json():

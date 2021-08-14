@@ -1,5 +1,3 @@
-// URL: GET http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/focos/?pais_id=33&estado_id=52&municipio_id=5205307
-
 [
     {
         "geometry": {
