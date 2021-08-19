@@ -30,11 +30,11 @@ def contaFoco(cidade, count):
 def line_prepender(filename, line):
 
     try:
-        
+
         with open(filename, 'r+') as f:
             content = f.read()
             f.seek(0, 0)
-            f.write(line.rstrip('\r\n') + '\n' + content)
+            f.write(line.rstrip('\r') + content)
             print('data.js editado!')
         
         with open(filename, 'r') as json_focos_file:
