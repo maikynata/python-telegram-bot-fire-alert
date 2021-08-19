@@ -1,4 +1,4 @@
-var geojsonFeature = [
+[
     {
         "id": "focos_ams_24h.7863a12c-1732-3196-bc7d-1481be10aa0e",
         "type": "Feature",
