@@ -30,13 +30,17 @@ def contaFoco(cidade, count):
 def line_prepender(filename, line):
 
     try:
+        
         with open(filename, 'r+') as f:
             content = f.read()
             f.seek(0, 0)
             f.write(line.rstrip('\r\n') + '\n' + content)
-            new_content = f.read()
-            print(new_content)
             print('data.js editado!')
+        
+        with open(filename, 'r') as json_focos_file:
+            content = json_focos_file.read()
+            print(content + ' +++ teste print content editado 999')
+
     except Exception as e:
             print(str(e))
 
@@ -52,11 +56,11 @@ def localFoco(cidade, coord):
         data_points = respCoordinates.json()
         with open('static/maps/data.js', 'w') as json_focos_file:
             json.dump(data_points, json_focos_file)
-            print('data_poins data.js file salvo!')
+            print('data_poins data.js file criado!')
 
         with open('static/maps/data.js', 'r') as json_focos_file:
             content = json_focos_file.read()
-            print(content + ' ++ test print content')
+            print(content + ' +test print content')
             
 
         # Edit the json file to add the var geojsonFeature'
