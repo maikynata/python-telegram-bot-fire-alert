@@ -451,5 +451,23 @@ def main():
     print(str(updater))
     updater.idle()
 
+
+from flask import Flask
+
+app = Flask(__name__, static_folder='static', static_url_path='')
+
+@app.route("/")
+def index():
+    
+    # Render HTML with count variable
+    return app.send_static_file("index.html")
+    
+
 if __name__ == "__main__":
     main()
+    app.run()
+
+
+
+
+    
