@@ -39,7 +39,8 @@ def line_prepender(filename, line):
         
         with open(filename, 'r') as json_focos_file:
             content = json_focos_file.read()
-            print(content + ' +++ teste print content editado 999')
+            print(content)
+            print('print content editado! test ok')
 
     except Exception as e:
             print(str(e))
@@ -64,7 +65,7 @@ def localFoco(cidade, coord):
             
 
         # Edit the json file to add the var geojsonFeature'
-        line_prepender('static/maps/data.js','var geojsonFeature =')
+        line_prepender('static/maps/data.js','var geojsonFeature = ')
 
         message = str()
         messageList = [] 
