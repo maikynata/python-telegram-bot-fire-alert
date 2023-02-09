@@ -1,4 +1,4 @@
-# Bot Alerta de Fogo - Project v1.0.0
+# Python Telegram Bot Alerta de Fogo - Project v1.0.0
 This is a **project in development** that provides an integration data between INPE Open Data Base API Service on: 
 http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/swagger.json and the client Python to send alerts via Telegram Bot.
 
